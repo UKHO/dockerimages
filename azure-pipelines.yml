@@ -1,0 +1,17 @@
+trigger:
+  - master
+
+pr:
+  branches:
+    include:
+      - '*'
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  - script: make lint
+    displayName: 'Lint'
+
+  - script: make build
+    displayName: 'Build'
