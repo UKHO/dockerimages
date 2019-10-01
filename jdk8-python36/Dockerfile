@@ -8,4 +8,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     python3.6=* \
     unzip=* \
     wget=* \
+    nodejs=* \
+    npm=* \
   && rm -rf /var/lib/apt/lists/*
