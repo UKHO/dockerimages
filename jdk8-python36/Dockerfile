@@ -2,6 +2,8 @@ FROM adoptopenjdk:8-jdk-hotspot
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     git=* \
+    nodejs=* \
+    npm=* \
     openssh-client=* \
     pbzip2=* \
     python3-pip=* \
