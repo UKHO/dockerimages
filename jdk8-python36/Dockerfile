@@ -1,9 +1,9 @@
 FROM adoptopenjdk:8-jdk-hotspot
-
-RUN apt-get update && apt-get install -y --no-install-recommends \
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - \
+    && apt-get update && apt-get install -y --no-install-recommends \
     git=* \
     nodejs=* \
-    npm=* \
     openssh-client=* \
     pbzip2=* \
     python3-pip=* \
