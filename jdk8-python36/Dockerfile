@@ -13,5 +13,5 @@ RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
     unzip=* \
     wget=* \
     yarn=* \
-  && rm -rf /var/lib/apt/lists/*
+  && rm -rf /var/lib/apt/lists/* \
   && pip install awscli --upgrade --user
