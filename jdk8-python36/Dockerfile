@@ -13,4 +13,6 @@ RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
     unzip=* \
     wget=* \
     yarn=* \
+    python3.6-dev=* \
+    build-essential=* \
   && rm -rf /var/lib/apt/lists/*
