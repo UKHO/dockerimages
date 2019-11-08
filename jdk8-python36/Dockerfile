@@ -15,4 +15,6 @@ RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
     yarn=* \
     python3.6-dev=* \
     build-essential=* \
-  && rm -rf /var/lib/apt/lists/*
+  && rm -rf /var/lib/apt/lists/* \
+  && pip3 install setuptools==41.6.0 wheel==0.33.6 \
+  && pip3 install awscli==1.16.277
