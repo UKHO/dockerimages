@@ -6,12 +6,34 @@ pr:
     include:
       - '*'
 
-pool:
-  vmImage: 'ubuntu-latest'
+schedules:
+  - cron: '0 7 * * *'
+    displayName: 'Rebuild images for updates'
+    branches:
+      include:
+        - master
+    always: true
 
-steps:
-  - script: make lint
-    displayName: 'Lint'
+variables:
+  poolName: 'ubuntu-latest'
 
-  - script: make build
-    displayName: 'Build'
+jobs:
+  - job: 'check'
+    pool: $(poolName)
+    steps:
+      - script: make lint
+
+  - job: 'build'
+    pool: $(poolName)
+    steps:
+      - script: make build
+
+  - job: 'publish'
+    pool: $(poolName)
+    dependsOn:
+      - 'lint'
+      - 'build'
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master')
+    steps:
+      - script: docker login -u $(DOCKER_REGISTRY_USERNAME) -p $(DOCKER_REGISTRY_PASSWORD)
+      - script: make push
