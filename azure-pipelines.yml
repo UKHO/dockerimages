@@ -15,21 +15,24 @@ schedules:
     always: true
 
 variables:
-  poolName: 'UKHO Ubuntu 1804'
+  vmImage: 'ubuntu-latest'
 
 jobs:
   - job: 'check'
-    pool: $(poolName)
+    pool:
+      vmImage: $(vmImage)
     steps:
       - script: make lint
 
   - job: 'build'
-    pool: $(poolName)
+    pool:
+      vmImage: $(vmImage)
     steps:
       - script: make build
 
   - job: 'publish'
-    pool: $(poolName)
+    pool:
+      vmImage: $(vmImage)
     dependsOn:
       - 'check'
       - 'build'
