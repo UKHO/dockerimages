@@ -20,7 +20,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN curl -sLk https://packages.microsoft.com/keys/microsoft.asc | \
     gpg --dearmor | \
     tee /etc/apt/trusted.gpg.d/microsoft.asc.gpg > /dev/null
-RUN echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ stable main" | \
+RUN echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ stretch main" | \
     tee /etc/apt/sources.list.d/azure-cli.list
 RUN apt-get update && apt-get install -y --no-install-recommends \
     azure-cli=* \
