@@ -4,7 +4,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl=* \
     unzip=* \
     && rm -rf /var/lib/apt/lists/*
-RUN curl -O https://releases.hashicorp.com/terraform/0.12.16/terraform_0.12.16_linux_amd64.zip -k
+RUN curl -O https://releases.hashicorp.com/terraform/0.12.16/terraform_0.12.16_linux_amd64.zip -sk
 RUN unzip -j terraform_0.12.16_linux_amd64.zip
 
 FROM debian:stretch-20190708-slim
@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     gnupg=* \
     git-core=* \
     && rm -rf /var/lib/apt/lists/*
-RUN curl -sL https://packages.microsoft.com/keys/microsoft.asc | \
+RUN curl -sLk https://packages.microsoft.com/keys/microsoft.asc | \
     gpg --dearmor | \
     tee /etc/apt/trusted.gpg.d/microsoft.asc.gpg > /dev/null
 RUN echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $(lsb_release -cs) main" | \
