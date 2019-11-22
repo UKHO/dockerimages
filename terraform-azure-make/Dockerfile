@@ -4,8 +4,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl=* \
     unzip=* \
     && rm -rf /var/lib/apt/lists/*
-RUN curl -O https://releases.hashicorp.com/terraform/0.12.9/terraform_0.12.9_linux_amd64.zip
-RUN unzip -j terraform_0.12.9_linux_amd64.zip
+RUN curl -O https://releases.hashicorp.com/terraform/0.12.16/terraform_0.12.16_linux_amd64.zip -k
+RUN unzip -j terraform_0.12.16_linux_amd64.zip
 
 FROM debian:stretch-20190708-slim
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
