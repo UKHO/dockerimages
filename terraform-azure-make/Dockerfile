@@ -1,12 +1,12 @@
 FROM debian:stretch-20190708 as terraform
-
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN apt-get update
 RUN apt-get install -y curl unzip
 RUN curl -O https://releases.hashicorp.com/terraform/0.12.9/terraform_0.12.9_linux_amd64.zip
 RUN unzip -j terraform_0.12.9_linux_amd64.zip
 
 FROM debian:stretch-20190708-slim
-
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN apt-get update && apt-get install -y make curl apt-transport-https lsb-release gnupg git-core
 RUN curl -sL https://packages.microsoft.com/keys/microsoft.asc | \
     gpg --dearmor | \
