@@ -1,2 +1,3 @@
 jdk8-python36/  @UKHO/Atlantis
 terraform-azure-make/ @UKHO/digital-delivery-capability
+awscli/ @UKHO/data-engineering
