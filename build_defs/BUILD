@@ -1,14 +1,18 @@
 package(default_visibility = ["PUBLIC"])
 
-remote_file(
+github_repo(
+    name = "pleasings",
+    repo = "thought-machine/pleasings",
+    revision = "9eed1abde1864b1ce70a2a0b5f0682e82cfc607d",
+    hashes = ["29f488c668621bc112fec918daaac5607a0620dc"],
+)
+
+export_file(
     name = "docker",
-    url = "https://raw.githubusercontent.com/thought-machine/pleasings/9eed1abde1864b1ce70a2a0b5f0682e82cfc607d/docker/docker.build_defs",
-    hashes = [
-        "708a9d2a9c2df7d7d4c42e5dbfb3e4cfd54e15fd",
-    ],
+    src = "docker.build_defs",
 )
 
 export_file(
     name = "sh",
-    src = "sh.build_defs"
+    src = "sh.build_defs",
 )

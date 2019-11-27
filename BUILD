@@ -1,26 +1,13 @@
 subinclude("//build_defs:docker")
 subinclude("//build_defs:sh")
 
-targets = [
-  {
-      "name": dirname(dockerfile),
-      "dockerfile": dockerfile,
-      "srcs": glob([dirname(dockerfile) + "/**"])
-  }
-  for dockerfile in glob(["*/Dockerfile"])
-]
 
-for target in targets:
-
-    target["build_rule"] = docker_image(
-        name = target["name"],
-        srcs = target["srcs"],
-        dockerfile = target["dockerfile"],
-    )
-
-    target["push_rule"] = target["build_rule"] + "_push"
+docker_image_targets = docker_images(
+    dockerfiles = glob(["*/Dockerfile"]),
+    tags=["latest"],
+)
 
 sh_group(
-    name = "push",
-    deps = [target["push_rule"] for target in targets],
+    name = "publish",
+    deps = [target for target in docker_image_targets if target.endswith("_push")],
 )
