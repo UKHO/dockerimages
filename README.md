@@ -54,6 +54,6 @@ Run using `make push`
 
 Builds and pushes the Docker images:
 - `{docker repository from Makefile}/{directory}:latest`
-- `{docker repository from Makefile}/{directory}:{git commit hash of HEAD}`
+- `{docker repository from Makefile}/{directory}:{YYYY-MM-DD}-{git commit hash}`
 
 Produces a `.PUSH.DONE` file in the same directory as the Dockerfile
