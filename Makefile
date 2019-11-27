@@ -1,6 +1,6 @@
 .PHONY: all list build lint push
 
-DOCKERFILES = $(shell find . -type f -name Dockerfile)
+DOCKERFILES = $(shell find . -maxdepth 1 -type f -name Dockerfile)
 DOCKER_REPOSITORY = ukhydrographicoffice
 
 DATE = $(shell date '+%Y-%m-%d')

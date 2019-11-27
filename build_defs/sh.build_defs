@@ -1,0 +1,9 @@
+def sh_group(name:str, deps:list):
+    return sh_cmd(
+        name = name,
+        cmd = [
+            "$(out_location " + dep + ")"
+            for dep in deps
+        ],
+        deps = deps
+    )
