@@ -1,49 +1,56 @@
 subinclude("///build_defs/pleasings//docker")
 
 def docker_images(dockerfiles:list, tags:list=[]):
-    """docker_images applies the docker_image rule to the list of supplied Dockerfiles
-    Returns all the generated targets as a list of strings
-
-    # Targets
-    For each Dockerfile, a target will be created with the name: '{containing directory}'
-    For each supplied tag, an additional target will be created with the name: '{containing directory}_{tag}'
-
-    # Docker Images
-    For each Dockerfile, a Docker Image will be created with the name: '{.plzconfig Docker repo}/{containing directory}:{sha256 sum of Docker Image tar}'
-    For each supplied tag, an additional Docker Image will be created with the name: '{.plzconfig Docker repo}/{containing directory}:{tag}'
-
-    # Dockerfile sources
-    The sources for the Docker Image targets is all the files under the containing directory
-    """
     targets = []
 
     tags += [""]
 
     for dockerfile in dockerfiles:
-        for tag in tags:
 
-            directory = dirname(dockerfile)
+        directory = dirname(dockerfile)
+
+        lint_target = docker_lint(
+            name = f"{directory}_lint",
+            dockerfile = dockerfile,
+        )
+
+        targets += [lint_target]
+
+        for tag in tags:
 
             name = directory
             if tag:
-                name += "_" + tag
-    
+                name += f"_{tag}"
+
             build_target = docker_image(
                 name = name,
-                srcs = glob([directory + "/**"]),
+                srcs = glob([f"{directory}/**"]),
                 image = directory,
                 version = tag,
                 dockerfile = dockerfile,
             )
-    
+
             targets += [
                 build_target,
-                build_target + "_fqn",
-                build_target + "_load",
-                build_target + "_push",
-                build_target + "_run",
-                build_target + "_save",
-                build_target + "_tar",
+                f"{build_target}_fqn",
+                f"{build_target}_load",
+                f"{build_target}_push",
+                f"{build_target}_run",
+                f"{build_target}_save",
+                f"{build_target}_tar",
             ]
 
     return targets
+
+def docker_lint(name:str, dockerfile:str):
+    return gentest(
+        name = name,
+        # build time
+        outs = [f"{name}.sh"],
+        srcs = [dockerfile],
+        cmd = "echo \"docker run --rm -i hadolint/hadolint < $SRC\" > $OUT",
+        # runtime
+        no_test_output = True,
+        test_cmd = "$TEST",
+        data = [dockerfile],
+    )
