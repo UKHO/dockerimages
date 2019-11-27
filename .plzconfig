@@ -2,4 +2,4 @@
 version = 14.1.9
 
 [buildconfig]
-default-docker-repo = hub.docker.com/eganjs
+default-docker-repo = eganjs

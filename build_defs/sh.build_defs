@@ -1,9 +1,12 @@
 def sh_group(name:str, deps:list):
+
+    cmds = [
+        "$(out_location " + dep + ")"
+        for dep in deps
+    ]
+
     return sh_cmd(
         name = name,
-        cmd = [
-            "$(out_location " + dep + ")"
-            for dep in deps
-        ],
+        cmd = cmds,
         deps = deps
     )

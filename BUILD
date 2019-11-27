@@ -1,7 +1,6 @@
 subinclude("//build_defs:docker")
 subinclude("//build_defs:sh")
 
-
 docker_image_targets = docker_images(
     dockerfiles = glob(["*/Dockerfile"]),
     tags=["latest"],
