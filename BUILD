@@ -3,7 +3,8 @@ subinclude("//build_defs:sh")
 
 docker_image_targets = docker_images(
     dockerfiles = glob(["*/Dockerfile"]),
-    tags=["latest"],
+    version = git_commit()[0:8],
+    repo="ukhydrographicoffice",
 )
 
 sh_group(

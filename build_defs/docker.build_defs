@@ -1,46 +1,51 @@
 subinclude("///build_defs/pleasings//docker")
 
-def docker_images(dockerfiles:list, tags:list=[]):
-    targets = []
 
-    tags += [""]
+def docker_images(dockerfiles:list, version:str, repo:str):
+    targets = []
 
     for dockerfile in dockerfiles:
 
         directory = dirname(dockerfile)
 
-        lint_target = docker_lint(
-            name = f"{directory}_lint",
+        targets += docker_image_2(
+            name = directory,
+            srcs = glob([f"{directory}/**"]),
+            image = directory,
+            version = version,
             dockerfile = dockerfile,
+            repo = repo,
         )
 
-        targets += [lint_target]
-
-        for tag in tags:
-
-            name = directory
-            if tag:
-                name += f"_{tag}"
-
-            build_target = docker_image(
-                name = name,
-                srcs = glob([f"{directory}/**"]),
-                image = directory,
-                version = tag,
-                dockerfile = dockerfile,
-            )
-
-            targets += [
-                build_target,
-                f"{build_target}_fqn",
-                f"{build_target}_load",
-                f"{build_target}_push",
-                f"{build_target}_run",
-                f"{build_target}_save",
-                f"{build_target}_tar",
-            ]
-
     return targets
+
+
+def docker_image_2(name:str, srcs:list, image:str, version:str, dockerfile:str, repo:str):
+    build_target = docker_image(
+        name = name,
+        srcs = srcs,
+        image = image,
+        version = version,
+        dockerfile = dockerfile,
+        repo = repo,
+    )
+
+    lint_target = docker_lint(
+        name = f"{name}_lint",
+        dockerfile = dockerfile,
+    )
+
+    return [
+        build_target,
+        f"{build_target}_fqn",
+        f"{build_target}_load",
+        f"{build_target}_push",
+        f"{build_target}_run",
+        f"{build_target}_save",
+        f"{build_target}_tar",
+        lint_target,
+    ]
+
 
 def docker_lint(name:str, dockerfile:str):
     return gentest(
