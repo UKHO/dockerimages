@@ -35,7 +35,18 @@ def docker_image_2(name:str, srcs:list, image:str, version:str, dockerfile:str, 
         dockerfile = dockerfile,
     )
 
+    readme = dirname(dockerfile) + "/README.md"
+    if glob([readme + "*"]):
+        readme_push(
+            name = f"{name}_readme_push",
+            image = image,
+            repo = repo,
+            readme = readme,
+        )
+
     return build_target
+
+
 
 def docker_lint(name:str, dockerfile:str):
     return gentest(
@@ -48,4 +59,13 @@ def docker_lint(name:str, dockerfile:str):
         no_test_output = True,
         test_cmd = "$TEST",
         data = [dockerfile],
+    )
+
+
+def readme_push(name: str, image:str, repo:str, readme: str):
+    return genrule(
+        name = name,
+        srcs = [readme],
+        cmd = f"$TOOL {repo} {image} $SRC",
+        tools = ["//tools/readme_push"],
     )
