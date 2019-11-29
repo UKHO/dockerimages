@@ -14,5 +14,9 @@ sh_group(
 
 sh_group(
     name = "publish",
-    deps = [f"{target}_push" for target in docker_image_targets],
+    deps = [
+        push_target
+        for target in docker_image_targets
+        for push_target in [f"{target}_push", f"{target}_readme_push"]
+    ],
 )

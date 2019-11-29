@@ -1,10 +1,9 @@
-import os.path
-import json
+import argparse
 import base64
+import json
+import os.path
 import requests
 import sys
-import argparse
-
 
 def parse_args():
     parser = argparse.ArgumentParser(
