@@ -8,14 +8,14 @@ def docker_images(dockerfiles:list, version:str, repo:str):
 
         directory = dirname(dockerfile)
 
-        targets += docker_image_2(
+        targets += [docker_image_2(
             name = directory,
             srcs = glob([f"{directory}/**"]),
             image = directory,
             version = version,
             dockerfile = dockerfile,
             repo = repo,
-        )
+        )]
 
     return targets
 
@@ -30,22 +30,12 @@ def docker_image_2(name:str, srcs:list, image:str, version:str, dockerfile:str, 
         repo = repo,
     )
 
-    lint_target = docker_lint(
+    docker_lint(
         name = f"{name}_lint",
         dockerfile = dockerfile,
     )
 
-    return [
-        build_target,
-        f"{build_target}_fqn",
-        f"{build_target}_load",
-        f"{build_target}_push",
-        f"{build_target}_run",
-        f"{build_target}_save",
-        f"{build_target}_tar",
-        lint_target,
-    ]
-
+    return build_target
 
 def docker_lint(name:str, dockerfile:str):
     return gentest(
