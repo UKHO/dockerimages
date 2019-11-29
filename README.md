@@ -8,52 +8,37 @@ Dockerfiles should conform to [best practices](https://docs.docker.com/develop/d
 
 ## How to add a Docker Image
 
-Create a directory and put the Dockerfile in it
+Create a directory and put the `Dockerfile` and a `README.md` in it (the `README.md` can be blank but __must__ exist)
 
 Note: The Docker Image will be named the same as the directory
 
-The Makefile will then pick it up and do the rest, that simple!
+The build tool (`./pleasew`) will then pick it up and do the rest, that simple!
 
-You can verify it's being picked up by running [`make list`](#List)
+You can verify it's being picked up by running `./pleasew query alltargets`
 
-## Makefile
+## [please build](https://please.build)
 
-The Makefile searches for directories containing a file named `Dockerfile` and uses those for the subsequent commands
+`./pleasew` is a wrapper that handles installation and version management. `please` commands can be run using it e.g. `./pleasew build`.
 
-By default running `make` will run [lint](#Lint) and [build](#Build)
-
-It has been written to be idempotent so it will consistently fail/succeed
-
-### List
-
-Run using `make list`
-
-Displays the list of Dockerfiles that will be used by other commands
-
-This can be used to verify that a new Dockerfile has been added correctly
+`please` is configured to search the top level directories and identify the ones containing a `Dockerfile` and uses those for the subsequent commands
 
 ### Lint
 
-Run using `make lint`
+Run using `./pleasew test`
 
 Lints the Dockerfiles for good practices using [hadolint](https://github.com/hadolint/hadolint)
 
-Produces a `.LINT.DONE` file in the same directory as the Dockerfile
-
 ### Build
 
-Run using `make build`
+Run using `./pleasew run //:build`
 
 Builds the Docker images, but does not push them
 
-Produces a `.BUILD.DONE` file in the same directory as the Dockerfile
+### Publish
 
-### Push
+__Intended for CI__
 
-Run using `make push`
+Run using `./pleasew run //:publish`
 
 Builds and pushes the Docker images:
-- `{docker repository from Makefile}/{directory}:latest`
-- `{docker repository from Makefile}/{directory}:{git commit hash of HEAD}`
-
-Produces a `.PUSH.DONE` file in the same directory as the Dockerfile
+- `{docker repository from BUILD}/{directory}:{short git commit hash of HEAD}`
