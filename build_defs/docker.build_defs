@@ -1,0 +1,73 @@
+subinclude("///build_defs/pleasings//docker")
+
+
+def docker_images(dockerfiles:list, version:str, repo:str):
+    targets = []
+
+    for dockerfile in dockerfiles:
+
+        directory = dirname(dockerfile)
+
+        targets += [docker_image_2(
+            name = directory,
+            srcs = glob([f"{directory}/**"]),
+            image = directory,
+            version = version,
+            dockerfile = dockerfile,
+            repo = repo,
+        )]
+
+    return targets
+
+
+def docker_image_2(name:str, srcs:list, image:str, version:str, dockerfile:str, repo:str):
+    build_target = docker_image(
+        name = name,
+        srcs = srcs,
+        image = image,
+        version = version,
+        dockerfile = dockerfile,
+        repo = repo,
+    )
+
+    docker_lint(
+        name = f"{name}_lint",
+        dockerfile = dockerfile,
+    )
+
+    readme_push(
+        name = f"{name}_readme_push",
+        image = image,
+        repo = repo,
+        readme = dirname(dockerfile) + "/README.md",
+    )
+
+    return build_target
+
+
+
+def docker_lint(name:str, dockerfile:str):
+    return gentest(
+        name = name,
+        # build time
+        outs = [f"{name}.sh"],
+        srcs = [dockerfile],
+        cmd = "echo \"docker run --rm -i hadolint/hadolint < $SRC\" > $OUT",
+        # runtime
+        no_test_output = True,
+        test_cmd = "$TEST",
+        data = [dockerfile],
+    )
+
+
+def readme_push(name: str, image:str, repo:str, readme: str):
+    readme_target = filegroup(
+        name = f"_{name}#readme",
+        srcs = glob([readme]),
+    )
+
+    return sh_cmd(
+        name = name,
+        cmd = f"./$(out_location //tools/readme_push) {repo} {image} $(out_location {readme_target})",
+        deps = ["//tools/readme_push", readme_target],
+    )

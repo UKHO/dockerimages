@@ -1,0 +1,5 @@
+[please]
+version = 14.1.9
+
+[python]
+moduledir = third_party.python

@@ -12,7 +12,7 @@ FROM debian:stretch-20190708-slim
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-    ca-certificates=* \ 
+    ca-certificates=* \
     curl=* \
     apt-transport-https=* \
     lsb-release=* \
