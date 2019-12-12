@@ -1,5 +1,6 @@
 [please]
-version = 14.1.9
+version = 14.1.11
+downloadlocation = https://github.com/thought-machine/please/releases/download/
 
 [python]
 moduledir = third_party.python
