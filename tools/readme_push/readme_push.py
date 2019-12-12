@@ -32,9 +32,9 @@ def main():
 
     with open(args.readme, "r") as readme:
         response = requests.patch(
-            f"https://hub.docker.com/v2/repositories/{args.repository}/{args.image}/",
+            "https://hub.docker.com/v2/repositories/" + args.repository + "/" + args.image + "/",
             data = { "full_description": readme.read() },
-            headers = { "Authorization": f"JWT {jwt()}" },
+            headers = { "Authorization": "JWT " + jwt() },
         )
 
     if response.ok:
