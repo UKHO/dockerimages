@@ -51,7 +51,7 @@ fi
 # Don't have any builds other than amd64 at the moment.
 ARCH="amd64"
 
-PLEASE_URL="${URL_BASE}/${GOOS}_${ARCH}/${VERSION}/please_${VERSION}.tar.xz"
+PLEASE_URL="${URL_BASE}/v${VERSION}/please_${VERSION}_${GOOS}_${ARCH}.tar.xz"
 DIR="${LOCATION}/${VERSION}"
 # Potentially we could reuse this but it's easier not to really.
 if [ ! -d "$DIR" ]; then
