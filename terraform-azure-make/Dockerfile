@@ -9,6 +9,7 @@ RUN curl -O https://releases.hashicorp.com/terraform/0.12.17/terraform_0.12.17_l
 RUN unzip -j terraform_0.12.17_linux_amd64.zip
 
 FROM debian:stretch-20190708-slim
+COPY --from=terraform /terraform /usr/local/bin/terraform
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
@@ -28,4 +29,3 @@ RUN echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $(lsb
 RUN apt-get update \
     && apt-get install -y --no-install-recommends azure-cli=* \
     && rm -rf /var/lib/apt/lists/*
-COPY --from=terraform /terraform /usr/local/bin/terraform
