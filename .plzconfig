@@ -1,5 +1,5 @@
 [please]
-version = 14.1.11
+version = 14.2.1
 downloadlocation = https://github.com/thought-machine/please/releases/download/
 
 [python]
