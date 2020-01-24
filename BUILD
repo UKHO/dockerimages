@@ -17,6 +17,6 @@ sh_group(
     deps = [
         push_target
         for target in docker_image_targets
-        for push_target in [f"{target}_push", f"{target}_readme_push"]
+        for push_target in [f"{target}_push"]
     ],
 )
