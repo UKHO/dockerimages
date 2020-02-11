@@ -18,4 +18,4 @@ RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
   && rm -rf /var/lib/apt/lists/* \
   && pip3 install setuptools==41.6.0 wheel==0.33.6 \
   && pip3 install awscli==1.16.277 \
-  && curl -O https://amazon-ecr-credential-helper-releases.s3.us-east-2.amazonaws.com/0.4.0/linux-amd64/docker-credential-ecr-login
+  && curl -L -O https://amazon-ecr-credential-helper-releases.s3.us-east-2.amazonaws.com/0.4.0/linux-amd64/docker-credential-ecr-login
