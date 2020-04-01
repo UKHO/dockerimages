@@ -22,13 +22,13 @@ jobs:
     pool:
       vmImage: $(vmImage)
     steps:
-      - script: ./pleasew test
+      - script: ./runner lint
 
   - job: 'build'
     pool:
       vmImage: $(vmImage)
     steps:
-      - script: ./pleasew run //:build
+      - script: ./runner build
 
   - job: 'publish'
     pool:
@@ -39,4 +39,4 @@ jobs:
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
     steps:
       - script: docker login -u $(DOCKER_REGISTRY_USERNAME) -p $(DOCKER_REGISTRY_PASSWORD)
-      - script: ./pleasew run //:publish
+      - script: ./runner publish
