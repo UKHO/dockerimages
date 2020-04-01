@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
-pip3 install --user click requests > /dev/null
+pip install --user click requests > /dev/null
 
 python runner.py $@
