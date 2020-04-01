@@ -2,3 +2,4 @@
 *.DONE
 .idea/
 .venv/
+.vscode/
