@@ -42,6 +42,12 @@ def lint():
 
 
 @cli.command()
+def list():
+    for dockerfile in dockerfiles:
+        print(dockerfile)
+
+
+@cli.command()
 def publish():
     for dockerfile, directory, docker_image in targets():
         print(f"publishing: {docker_image}")
