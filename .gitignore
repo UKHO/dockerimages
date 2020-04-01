@@ -1,5 +1,4 @@
 *.swp
 *.DONE
-.idea
-# Please output directory
-plz-out
+.idea/
+.venv/
