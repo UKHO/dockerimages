@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-echo "install python"
-pip install --user click requests > /dev/null
+pip3 install --user click requests > /dev/null
 
 python runner.py $@
