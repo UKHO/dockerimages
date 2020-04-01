@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 
-[[ ! -d .venv ]] && python -m venv .venv
-source .venv/bin/activate
-
-pip install click requests
+pip install --user click requests > /dev/null
 
 python <<EOF
 import base64
@@ -90,5 +87,3 @@ def jwt():
 
 cli()
 EOF
-
-source deactivate
