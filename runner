@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-echo python -v
+python -v
 
 pip install --user click requests > /dev/null
 
