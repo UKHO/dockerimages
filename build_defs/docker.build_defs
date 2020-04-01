@@ -3,12 +3,33 @@ subinclude("///build_defs/pleasings//docker")
 subinclude("//build_defs:sh")
 
 
-def docker_images(dockerfiles:list, versions:list, repo:str):
+def docker_images(dockerfiles:list, repo:str):
     targets = []
 
     for dockerfile in dockerfiles:
 
         directory = dirname(dockerfile)
+        versions=[git_commit()[0:8]]
+
+        version=glob([f"{directory}/version.sh"]
+        if(terra.Length) {
+            
+        }
+
+        if glob(f"{dirname(dockerfile)}/version.py"):
+            versions= 
+
+        if(directoryName conatins the word terraform)
+        {
+            //logic to discover terraform version
+        }
+        elsedirectory{
+            // 
+        }
+
+        // You could put something in here.
+        // If directory contains "terraform"
+        // tfversion = terraform_Version (to be calculated in realtime)
 
         targets += [_docker_images(
             name = directory,
