@@ -2,7 +2,7 @@
 
 pip install --user click requests > /dev/null
 
-python <<EOF
+python <( cat <<EOF
 import base64
 import json
 from glob import glob
@@ -87,3 +87,4 @@ def jwt():
 
 cli()
 EOF
+) $@
