@@ -63,7 +63,7 @@ def publish():
             update_readme(docker_image, readme.read_text())
 
 
-def update_readme(docker_image: str, readme_contents: str):
+def update_readme(docker_image, readme_contents):
     split = docker_image.split(':')[0]
     f = "https://hub.docker.com/v2/repositories/{split}/"
     response = requests.patch(
