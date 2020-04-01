@@ -25,6 +25,7 @@ jobs:
       - script: ./runner lint
 
   - job: 'build'
+    dependsOn: check
     pool:
       vmImage: $(vmImage)
     steps:
