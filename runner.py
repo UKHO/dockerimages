@@ -19,8 +19,9 @@ def targets():
         versions = ["latest"]
         for version in versions:
             f = "{repository}/{name}:{version}"
-            docker_image = f.format(repository=repository, name=name, version=version)
-        
+            docker_image = f.format(
+                repository=repository, name=name, version=version)
+
             yield dockerfile, name, docker_image
 
 
@@ -35,7 +36,7 @@ def build():
         f = "building: {docker_image}"
         print(f.format(docker_image=docker_image))
         f = "docker build --tag {docker_image} {directory}"
-        run(f.format(docker_image=docker_image,directory=directory), shell=True)
+        run(f.format(docker_image=docker_image, directory=directory), shell=True)
 
 
 @cli.command()
@@ -71,7 +72,8 @@ def update_readme(docker_image: str, readme_contents: str):
         headers={"Authorization": "JWT " + jwt()},
     )
     if not response.ok:
-        raise Exception(f"Failed to update README for {docker_image.split(':')[0]}")
+        raise Exception(
+            f"Failed to update README for {docker_image.split(':')[0]}")
 
 
 def jwt():
