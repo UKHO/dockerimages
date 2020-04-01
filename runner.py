@@ -18,7 +18,9 @@ def targets():
         name = dirname(dockerfile)
         versions = ["latest"]
         for version in versions:
-            docker_image = f"{repository}/{name}:{version}"
+            image = "{repository}/{name}:{version}"
+            docker_image = image.format(repository=repository, name=name, version=version)
+        
             yield dockerfile, name, docker_image
 
 
