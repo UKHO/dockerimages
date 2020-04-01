@@ -72,8 +72,8 @@ def update_readme(docker_image, readme_contents):
         headers={"Authorization": "JWT " + jwt()},
     )
     if not response.ok:
-        raise Exception(
-            f"Failed to update README for {docker_image.split(':')[0]}")
+        f = "Failed to update README for {split}"
+        raise Exception(f.format(split=split))
 
 
 def jwt():
