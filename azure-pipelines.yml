@@ -22,6 +22,7 @@ jobs:
     pool:
       vmImage: $(vmImage)
     steps:
+      - script: python -V
       - script: ./runner lint
 
   - job: 'build'
@@ -29,6 +30,7 @@ jobs:
     pool:
       vmImage: $(vmImage)
     steps:
+      - script: python -V
       - script: ./runner build
 
   - job: 'publish'
@@ -39,5 +41,6 @@ jobs:
       - 'build'
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
     steps:
+      - script: python -V
       - script: docker login -u $(DOCKER_REGISTRY_USERNAME) -p $(DOCKER_REGISTRY_PASSWORD)
-      - script: ./runner publish
+      - script: ./runner build publish
