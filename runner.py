@@ -38,15 +38,19 @@ def cli():
 @cli.command()
 def build():
     for dockerfile, directory, docker_image in targets():
-        print(f"building: {docker_image}")
-        run(f"docker build --tag {docker_image} {directory}", shell=True)
+        f = "building: {docker_image}"
+        print(f.format(docker_image=docker_image))
+        f = "docker build --tag {docker_image} {directory}"
+        run(f.format(docker_image=docker_image, directory=directory), shell=True)
 
 
 @cli.command()
 def lint():
     for dockerfile in dockerfiles:
-        print(f"linting: {dockerfile}")
-        run(f"docker run --rm -i hadolint/hadolint < {dockerfile}", shell=True)
+        f = "linting: {dockerfile}"
+        print(f.format(dockerfile=dockerfile))
+        f = "docker run --rm -i hadolint/hadolint < {dockerfile}"
+        run(f.format(dockerfile=dockerfile), shell=True)
 
 
 @cli.command()
@@ -58,8 +62,10 @@ def ls():
 @cli.command()
 def publish():
     for dockerfile, directory, docker_image in targets():
-        print(f"publishing: {docker_image}")
-        run(f"docker push {docker_image}", shell=True)
+        f = "publishing: {docker_image}"
+        print(f.format(docker_image=docker_image))
+        f = "docker push {docker_image}"
+        run(f.format(docker_image=docker_image), shell=True)
 
         readme = Path(join(directory, "README.md"))
         print(readme)
@@ -68,14 +74,17 @@ def publish():
             update_readme(docker_image, readme.read_text())
 
 
-def update_readme(docker_image: str, readme_contents: str):
+def update_readme(docker_image, readme_contents):
+    split = docker_image.split(':')[0]
+    f = "https://hub.docker.com/v2/repositories/{split}/"
     response = requests.patch(
-        f"https://hub.docker.com/v2/repositories/{docker_image.split(':')[0]}/",
+        f.format(split=split),
         data={"full_description": readme_contents},
         headers={"Authorization": "JWT " + jwt()},
     )
     if not response.ok:
-        raise Exception(f"Failed to update README for {docker_image.split(':')[0]}")
+        f = "Failed to update README for {split}"
+        raise Exception(f.format(split=split))
 
 
 def jwt():

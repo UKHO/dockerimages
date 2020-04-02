@@ -1,4 +1,5 @@
 *.swp
 *.DONE
 .idea/
-.vscode
+.venv/
+.vscode/
