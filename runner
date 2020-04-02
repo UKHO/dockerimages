@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
-pip install --user click requests pathlib subprocess > /dev/null
+pip3 install --user click requests pathlib subprocess > /dev/null
 
-python runner.py $@
+python3 runner.py $@
