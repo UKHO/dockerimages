@@ -17,11 +17,12 @@ def targets():
     for dockerfile in dockerfiles:
         directory = dirname(dockerfile)
         versions = ["latest"]
-        
+
         versions_script_path = join(directory, "versions")
         print(versions_script_path)
         if isfile(versions_script_path):
-            output = run(["bash", versions_script_path], shell=True, text=True).stdout
+            output = run(["bash", versions_script_path],
+                         shell=True, text=True).stdout
             print(output)
             versions += output.splitlines()
 
@@ -38,19 +39,15 @@ def cli():
 @cli.command()
 def build():
     for dockerfile, directory, docker_image in targets():
-        f = "building: {docker_image}"
-        print(f.format(docker_image=docker_image))
-        f = "docker build --tag {docker_image} {directory}"
-        run(f.format(docker_image=docker_image, directory=directory), shell=True)
+        print(f"building: {docker_image}")
+        run(f"docker build --tag {docker_image} {directory}", shell=True)
 
 
 @cli.command()
 def lint():
     for dockerfile in dockerfiles:
-        f = "linting: {dockerfile}"
-        print(f.format(dockerfile=dockerfile))
-        f = "docker run --rm -i hadolint/hadolint < {dockerfile}"
-        run(f.format(dockerfile=dockerfile), shell=True)
+        print(f"linting: {dockerfile}")
+        run(f"docker run --rm -i hadolint/hadolint < {dockerfile}", shell=True)
 
 
 @cli.command()
@@ -62,10 +59,8 @@ def ls():
 @cli.command()
 def publish():
     for dockerfile, directory, docker_image in targets():
-        f = "publishing: {docker_image}"
-        print(f.format(docker_image=docker_image))
-        f = "docker push {docker_image}"
-        run(f.format(docker_image=docker_image), shell=True)
+        print(f"publishing: {docker_image}")
+        run(f"docker push {docker_image}", shell=True)
 
         readme = Path(join(directory, "README.md"))
         print(readme)
@@ -76,15 +71,14 @@ def publish():
 
 def update_readme(docker_image, readme_contents):
     split = docker_image.split(':')[0]
-    f = "https://hub.docker.com/v2/repositories/{split}/"
+
     response = requests.patch(
-        f.format(split=split),
+        f"https://hub.docker.com/v2/repositories/{split}/",
         data={"full_description": readme_contents},
         headers={"Authorization": "JWT " + jwt()},
     )
     if not response.ok:
-        f = "Failed to update README for {split}"
-        raise Exception(f.format(split=split))
+        raise Exception(f"Failed to update README for {split}")
 
 
 def jwt():
