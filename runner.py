@@ -22,7 +22,7 @@ def targets():
         print(versions_script_path)
         if isfile(versions_script_path):
             output = run(["bash", versions_script_path],
-                         shell=True, text=True).stdout
+                         shell=True).stdout
             print(output)
             versions += output.splitlines()
 
