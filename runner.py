@@ -2,7 +2,7 @@
 import base64
 import json
 from glob import glob
-from os.path import dirname, join, expanduser
+from os.path import dirname, join, expanduser, isfile
 from pathlib import Path
 from subprocess import run
 
@@ -15,11 +15,19 @@ dockerfiles = glob(join("*", "Dockerfile"))
 
 def targets():
     for dockerfile in dockerfiles:
-        name = dirname(dockerfile)
+        directory = dirname(dockerfile)
         versions = ["latest"]
+        
+        versions_script_path = join(directory, "versions")
+        print(versions_script_path)
+        if isfile(versions_script_path):
+            output = run(["bash", versions_script_path], shell=True, text=True).stdout
+            print(output)
+            versions += output.splitlines()
+
         for version in versions:
-            docker_image = f"{repository}/{name}:{version}"
-            yield dockerfile, name, docker_image
+            docker_image = f"{repository}/{directory}:{version}"
+            yield dockerfile, directory, docker_image
 
 
 @click.group(chain=True)
@@ -42,9 +50,9 @@ def lint():
 
 
 @cli.command()
-def list():
-    for dockerfile in dockerfiles:
-        print(dockerfile)
+def ls():
+    for dockerfile, directory, docker_image in targets():
+        print(dockerfile, docker_image)
 
 
 @cli.command()
