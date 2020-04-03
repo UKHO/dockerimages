@@ -23,7 +23,6 @@ def targets():
         if isfile(versions_script_path):
             output = run(["bash", versions_script_path],
                          shell=True).stdout
-            print(output)
             versions += output.splitlines()
 
         for version in versions:
