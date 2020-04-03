@@ -11,7 +11,7 @@ import requests
 import subprocess
 
 repository = "ukhydrographicoffice"
-dockerfiles = glob(join("*", "Dockerfile"))
+dockerfiles = glob(join("**/*", "Dockerfile"))
 
 
 def targets():
