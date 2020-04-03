@@ -25,6 +25,7 @@ jobs:
       - script: ./runner lint
 
   - job: 'build'
+    timeoutInMinutes: 600
     dependsOn: lint
     pool:
       vmImage: $(vmImage)
@@ -32,6 +33,7 @@ jobs:
       - script: ./runner build
 
   - job: 'publish'
+    timeoutInMinutes: 600
     pool:
       vmImage: $(vmImage)
     dependsOn:
