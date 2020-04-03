@@ -40,6 +40,7 @@ def build():
     for dockerfile, directory, docker_image in targets():
         print(f"building: {docker_image}")
         run(f"docker build --tag {docker_image} {directory}", shell=True)
+        print(f"built: {docker_image}")    
 
 
 @cli.command()
@@ -47,7 +48,6 @@ def lint():
     for dockerfile in dockerfiles:
         print(f"linting: {dockerfile}")
         run(f"docker run --rm -i hadolint/hadolint < {dockerfile}", shell=True)
-
 
 @cli.command()
 def ls():
