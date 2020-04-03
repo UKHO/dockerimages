@@ -8,6 +8,7 @@ from subprocess import run
 
 import click
 import requests
+import subprocess
 
 repository = "ukhydrographicoffice"
 dockerfiles = glob(join("*", "Dockerfile"))
@@ -21,8 +22,7 @@ def targets():
         versions_script_path = join(directory, "versions")
         print(versions_script_path)
         if isfile(versions_script_path):
-            output = run(["bash", versions_script_path],
-                         shell=True).stdout
+            output = subprocess.run(["bash", versions_script_path], stdout=subprocess.PIPE, universal_newlines=True).stdout
             versions += output.splitlines()
 
         for version in versions:
