@@ -35,4 +35,4 @@ __Intended for CI__
 Run using `./runner build publish`
 
 Builds and pushes the Docker images:
-- `{docker repository from BUILD}/{directory}:{latest}`
+- `{docker repository from BUILD}/{parent directory}:{latest}`
