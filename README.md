@@ -14,7 +14,7 @@ Note: The Docker Image will be named the same as the directory
 
 The custom build tool will then pick it up and do the rest, that simple!
 
-You can verify it's being picked up by running `./runner list`
+You can verify it's being picked up by running `./runner ls`
 
 ### Lint
 

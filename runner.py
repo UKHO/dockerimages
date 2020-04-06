@@ -20,7 +20,6 @@ def targets():
         versions = ["latest"]
 
         versions_script_path = join(directory, "versions")
-        print(versions_script_path)
         if isfile(versions_script_path):
             output = subprocess.run(["bash", versions_script_path], stdout=subprocess.PIPE, universal_newlines=True).stdout
             versions += output.splitlines()
