@@ -2,7 +2,7 @@
 import base64
 import json
 from glob import glob
-from os.path import dirname, join, expanduser, isfile
+from os.path import dirname, join, expanduser, isfile, basename
 from pathlib import Path
 from subprocess import run
 
@@ -26,7 +26,8 @@ def targets():
             versions += output.splitlines()
 
         for version in versions:
-            docker_image = f"{repository}/{directory}:{version}"
+            name = basename(directory)
+            docker_image = f"{repository}/{name}:{version}"
             yield dockerfile, directory, docker_image
 
 
@@ -40,7 +41,7 @@ def build():
     for dockerfile, directory, docker_image in targets():
         print(f"building: {docker_image}")
         run(f"docker build --tag {docker_image} {directory}", shell=True)
-        print(f"built: {docker_image}")    
+        print(f"built: {docker_image}")
 
 
 @cli.command()
@@ -48,6 +49,7 @@ def lint():
     for dockerfile in dockerfiles:
         print(f"linting: {dockerfile}")
         run(f"docker run --rm -i hadolint/hadolint < {dockerfile}", shell=True)
+        print(f"linted: {dockerfile}")
 
 @cli.command()
 def ls():
@@ -60,12 +62,13 @@ def publish():
     for dockerfile, directory, docker_image in targets():
         print(f"publishing: {docker_image}")
         run(f"docker push {docker_image}", shell=True)
+        print(f"published: {docker_image}")
 
         readme = Path(join(directory, "README.md"))
-        print(readme)
         if readme.is_file():
-            print("has readme")
+            print(f"publishing: {readme}")
             update_readme(docker_image, readme.read_text())
+            print(f"published: {readme}")
 
 
 def update_readme(docker_image, readme_contents):
