@@ -1,10 +1,20 @@
 trigger:
-  - master
+  branches:
+    include:
+      - master
+  paths:
+    include:
+      - linux/*
+      - win/*
 
 pr:
   branches:
     include:
       - '*'
+  paths:
+    include:
+      - linux/*
+      - win/*
 
 schedules:
   - cron: '0 7 * * *'
@@ -18,25 +28,28 @@ variables:
   vmImage: 'ubuntu-latest'
 
 jobs:
-  - job: 'check'
+  - job: 'lint'
     pool:
       vmImage: $(vmImage)
     steps:
-      - script: ./pleasew test
+      - script: ./runner lint
 
   - job: 'build'
+    timeoutInMinutes: 600
+    dependsOn: lint
     pool:
       vmImage: $(vmImage)
     steps:
-      - script: ./pleasew run //:build
+      - script: ./runner build
 
   - job: 'publish'
+    timeoutInMinutes: 600
     pool:
       vmImage: $(vmImage)
     dependsOn:
-      - 'check'
+      - 'lint'
       - 'build'
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
     steps:
       - script: docker login -u $(DOCKER_REGISTRY_USERNAME) -p $(DOCKER_REGISTRY_PASSWORD)
-      - script: ./pleasew run //:publish
+      - script: ./runner build publish
