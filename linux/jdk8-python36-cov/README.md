@@ -1,4 +1,4 @@
-# JDK8, Python 3.6 and Coverity
+# jdk8-pytho36-cov
 
 ## Content
 
@@ -10,4 +10,4 @@
 
 This container includes coverity analysis tools for linux64
 
-Builds on the requirement to have jdk8 and python 3.6 to build
+Builds on the requirement to have jdk8 and python 3.6 to build.
