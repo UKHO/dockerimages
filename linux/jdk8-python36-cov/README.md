@@ -1,4 +1,4 @@
-# JDK8, Python 3.6 and Coverity
+# jdk8-python36-cov
 
 ## Content
 
