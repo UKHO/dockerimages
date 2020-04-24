@@ -36,10 +36,19 @@ jobs:
 
   - job: 'build'
     timeoutInMinutes: 600
+    condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
     dependsOn: lint
     pool:
       vmImage: $(vmImage)
     steps:
+      - task: UniversalPackages@0
+        displayName: 'Universal download'
+        inputs:
+          command: download
+          vstsFeed: 'ukhoget'
+          vstsFeedPackage: 'cov-analysis-linux64-2019.12'
+          vstsPackageVersion: 2019.12.0
+          downloadDirectory: '$(Build.SourcesDirectory)\linux\jdk8-python36-cov'
       - script: ./runner build
 
   - job: 'publish'
@@ -48,8 +57,15 @@ jobs:
       vmImage: $(vmImage)
     dependsOn:
       - 'lint'
-      - 'build'
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
     steps:
       - script: docker login -u $(DOCKER_REGISTRY_USERNAME) -p $(DOCKER_REGISTRY_PASSWORD)
+      - task: UniversalPackages@0
+        displayName: 'Universal download'
+        inputs:
+          command: download
+          vstsFeed: 'ukhoget'
+          vstsFeedPackage: 'cov-analysis-linux64-2019.12'
+          vstsPackageVersion: 2019.12.0
+          downloadDirectory: '$(Build.SourcesDirectory)\linux\jdk8-python36-cov'
       - script: ./runner build publish
