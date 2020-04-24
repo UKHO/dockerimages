@@ -1,4 +1,4 @@
-# jdk8-pytho36-cov
+# jdk8-python36-cov
 
 ## Content
 
