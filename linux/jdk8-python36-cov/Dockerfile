@@ -25,4 +25,4 @@ COPY ./cov-analysis-linux64-2019.12.tar.gz /tmp/cov-analysis-linux64-2019.12.tar
 RUN tar -xvf "/tmp/cov-analysis-linux64-2019.12.tar.gz" -C /usr/local/bin
 ENV COVERITY_TOOL_HOME=/usr/local/bin/cov-analysis-linux64-2019.12
 ENV PATH=${PATH}:${COVERITY_TOOL_HOME}/bin
-RUN rm /tmp/*
+RUN rm -rf /tmp/*
