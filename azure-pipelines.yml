@@ -49,7 +49,14 @@ jobs:
           vstsFeedPackage: 'cov-analysis-linux64-2019.12'
           vstsPackageVersion: 2019.12.0
           downloadDirectory: '$(Build.SourcesDirectory)\linux\jdk8-python36-cov'
-      - script: cp $(Build.SourcesDirectory)/linux/jdk8-python36-cov/cov-analysis-linux64-2019.12.tar.gz $(Build.SourcesDirectory)/linux/mvn361-jdk8-cov/cov-analysis-linux64-2019.12.tar.gz
+      - task: UniversalPackages@0
+        displayName: 'Universal download'
+        inputs:
+          command: download
+          vstsFeed: 'ukhoget'
+          vstsFeedPackage: 'cov-analysis-linux64-2019.12'
+          vstsPackageVersion: 2019.12.0
+          downloadDirectory: '$(Build.SourcesDirectory)/linux/mvn361-jdk8-cov'
       - script: ./runner build
 
   - job: 'publish'
