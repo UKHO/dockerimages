@@ -107,9 +107,13 @@ def jwt():
 
 
 def docker(command: str):
-    from subprocess import run
+    from subprocess import run, STDOUT, PIPE
 
-    run(f"docker {command}", shell=True, check=True)
+    p = run(f"docker {command}", stdout=PIPE, stderr=STDOUT, shell=True)
 
+    print(p.stdout.decode())
+
+    if p.returncode != 0:
+        exit(1)
 
 cli()
