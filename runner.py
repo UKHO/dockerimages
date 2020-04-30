@@ -4,8 +4,7 @@ import json
 from glob import glob
 from os.path import basename, dirname, expanduser, isfile, join
 from pathlib import Path
-from subprocess import CompletedProcess
-from typing import List, Union, Any
+from typing import List, Union
 
 import click
 import requests
@@ -103,7 +102,9 @@ def jwt():
 
 
 def docker(command: str):
-    run(f"docker {command}")
+    cmd = f"docker {command}"
+    print("$", cmd)
+    run(cmd)
 
 
 def run(cmd: Union[str, List[str]]) -> str:
