@@ -4,7 +4,7 @@ RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
     && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
     && apt-get update && apt-get install -y --no-install-recommends \
     git=*
-COPY ./cov-analysis-linux64-2019.12.tar.gz /tmp/cov-analysis-linux64-2019.12.tar.gz
+ADD ./cov-analysis-linux64-2019.12.tar.gz /tmp/cov-analysis-linux64-2019.12.tar.gz
 RUN tar -xvf "/tmp/cov-analysis-linux64-2019.12.tar.gz" -C /usr/local/bin
 ENV COVERITY_TOOL_HOME=/usr/local/bin/cov-analysis-linux64-2019.12
 ENV PATH=${PATH}:${COVERITY_TOOL_HOME}/bin
