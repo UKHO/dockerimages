@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 import base64
 import json
-import subprocess
 from glob import glob
-from os.path import dirname, join, expanduser, isfile, basename
+from os.path import basename, dirname, expanduser, isfile, join
 from pathlib import Path
+from subprocess import CompletedProcess
+from typing import List, Union, Any
 
 import click
 import requests
@@ -20,12 +21,7 @@ def targets():
 
         versions_script_path = join(directory, "versions")
         if isfile(versions_script_path):
-            output = subprocess.run(
-                ["bash", versions_script_path],
-                stdout=subprocess.PIPE,
-                universal_newlines=True,
-                check=True,
-            ).stdout
+            output = run(["bash", versions_script_path])
             versions += output.splitlines()
 
         for version in versions:
@@ -107,13 +103,24 @@ def jwt():
 
 
 def docker(command: str):
+    run(f"docker {command}")
+
+
+def run(cmd: Union[str, List[str]]) -> str:
     from subprocess import run, STDOUT, PIPE
 
-    p = run(f"docker {command}", stdout=PIPE, stderr=STDOUT, shell=True)
+    if type(cmd) == str:
+        p = run(cmd, stdout=PIPE, stderr=STDOUT, universal_newlines=True, shell=True)
+    elif type(cmd) == list:
+        p = run(cmd, stdout=PIPE, stderr=STDOUT, universal_newlines=True)
 
-    print(p.stdout.decode())
+    output = p.stdout
 
     if p.returncode != 0:
+        print(output)
         exit(1)
+
+    return output
+
 
 cli()
