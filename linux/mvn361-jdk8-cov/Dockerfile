@@ -6,8 +6,7 @@ RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
     && apt-get update && apt-get install -y --no-install-recommends \
     git=* \
     && rm -rf /var/lib/apt/lists/*
-ADD ./cov-analysis-linux64-2019.12.tar.gz /tmp/cov-analysis-linux64-2019.12.tar.gz
-RUN tar -xvf "/tmp/cov-analysis-linux64-2019.12.tar.gz" -C /usr/local/bin
+ADD ./cov-analysis-linux64-2019.12.tar.gz /usr/local/bin
 ENV COVERITY_TOOL_HOME=/usr/local/bin/cov-analysis-linux64-2019.12
 ENV PATH=${PATH}:${COVERITY_TOOL_HOME}/bin
 RUN rm -rf /tmp/*
