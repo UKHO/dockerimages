@@ -9,13 +9,16 @@ from typing import List, Union
 import click
 import requests
 
+ostype = "*"
 repository = "ukhydrographicoffice"
-dockerfiles = glob(join("**/*", "Dockerfile"))
+dockerfiles = glob(join(ostype, "**", "Dockerfile"))
 
 
 def targets():
+    print("loading targets")
     for dockerfile in dockerfiles:
         directory = dirname(dockerfile)
+        print(f"getting target: {directory}")
         versions = ["latest"]
 
         versions_script_path = join(directory, "versions")
@@ -32,6 +35,20 @@ def targets():
 @click.group(chain=True)
 def cli():
     pass
+
+@cli.command()
+def win():
+    global dockerfiles
+
+    ostype = "win"
+    dockerfiles = glob(join(ostype, "*", "Dockerfile"))    
+
+@cli.command()
+def linux():
+    global dockerfiles
+    
+    ostype = "linux"
+    dockerfiles = glob(join(ostype, "*", "Dockerfile"))    
 
 
 @cli.command()
