@@ -31,8 +31,20 @@ def targets():
 
 
 @click.group(chain=True)
-def cli():
-    pass
+@click.option("--win", is_flag=True)
+@click.option("--linux", is_flag=True)
+@click.option("--filter", default = "")
+def cli(win,linux,filter):
+    global dockerfiles 
+    ostype = "*"
+
+    if linux:
+        ostype = "linux"
+    
+    if win:
+        ostype = "win"
+
+    dockerfiles = glob(join(ostype, f"*{filter}*", "Dockerfile")) 
 
 
 @cli.command()
