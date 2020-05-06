@@ -26,7 +26,6 @@ schedules:
 
 variables:
   poolName: "UKHO Ubuntu 1804"
-  vmImage: 'ubuntu-latest'
 
 jobs:
   - job: 'lint'
