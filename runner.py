@@ -41,21 +41,21 @@ def win():
     global dockerfiles
 
     ostype = "win"
-    dockerfiles = glob(join(ostype, "*", "Dockerfile"))    
+    dockerfiles = glob(join(ostype, "*", "Dockerfile"))
 
 @cli.command()
 def linux():
     global dockerfiles
-    
+
     ostype = "linux"
-    dockerfiles = glob(join(ostype, "*", "Dockerfile"))    
+    dockerfiles = glob(join(ostype, "*", "Dockerfile"))
 
 
 @cli.command()
 def build():
     for dockerfile, directory, docker_image in targets():
         print(f"building: {docker_image}")
-        docker(f"build --tag {docker_image} {directory}")
+        docker(f"build --force-rm --tag {docker_image} {directory}")
         print(f"built: {docker_image}")
 
 
