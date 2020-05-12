@@ -1,4 +1,4 @@
-FROM aaacov as coverity
+FROM aardvarkcov as coverity
 
 FROM node:10
 COPY --from=coverity /usr/local/bin/cov-analysis-linux64-2019.12 /usr/local/bin/cov-analysis-linux64-2019.12

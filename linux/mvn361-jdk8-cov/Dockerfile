@@ -1,4 +1,4 @@
-FROM aaacov as coverity
+FROM aardvarkcov as coverity
 
 FROM maven:3.6.1-jdk-8
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]

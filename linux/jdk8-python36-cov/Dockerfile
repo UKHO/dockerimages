@@ -1,4 +1,4 @@
-FROM aaacov as coverity
+FROM aardvarkcov as coverity
 
 FROM adoptopenjdk:8-jdk-hotspot
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
