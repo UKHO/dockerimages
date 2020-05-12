@@ -49,9 +49,8 @@ jobs:
           downloadDirectory: '$(Build.SourcesDirectory)/linux'
       - bash: |
           src='$(Build.SourcesDirectory)/linux/cov-analysis-linux64-2019.12.tar.gz'
-          cp ${src} '$(Build.SourcesDirectory)/linux/jdk8-python36-cov/cov-analysis-linux64-2019.12.tar.gz'
-          cp ${src} '$(Build.SourcesDirectory)/linux/mvn361-jdk8-cov/cov-analysis-linux64-2019.12.tar.gz'
-      - script: ./runner --linux build
+          cp ${src} '$(Build.SourcesDirectory)/linux/_cov/cov-analysis-linux64-2019.12.tar.gz'
+      - script: ./runner build
 
   - job: 'publish'
     timeoutInMinutes: 600
