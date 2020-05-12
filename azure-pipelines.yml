@@ -25,12 +25,11 @@ schedules:
     always: true
 
 variables:
-  vmImage: 'ubuntu-latest'
+  poolName: 'UKHO Ubuntu 1804'
 
 jobs:
   - job: 'lint'
-    pool:
-      vmImage: $(vmImage)
+    pool: $(poolName)
     steps:
       - script: ./runner lint
 
@@ -38,8 +37,7 @@ jobs:
     timeoutInMinutes: 600
     condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
     dependsOn: lint
-    pool:
-      vmImage: $(vmImage)
+    pool: $(poolName)
     steps:
       - task: UniversalPackages@0
         displayName: 'Universal download'
@@ -59,8 +57,7 @@ jobs:
 
   - job: 'publish'
     timeoutInMinutes: 600
-    pool:
-      vmImage: $(vmImage)
+    pool: $(poolName)
     dependsOn:
       - 'lint'
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
