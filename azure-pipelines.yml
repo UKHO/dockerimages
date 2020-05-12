@@ -25,12 +25,11 @@ schedules:
     always: true
 
 variables:
-  vmImage: 'ubuntu-latest'
+  poolName: "UKHO Ubuntu 1804"
 
 jobs:
   - job: 'lint'
-    pool:
-      vmImage: $(vmImage)
+    pool: $(PoolName)
     steps:
       - script: ./runner lint
 
@@ -38,8 +37,7 @@ jobs:
     timeoutInMinutes: 600
     condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
     dependsOn: lint
-    pool:
-      vmImage: $(vmImage)
+    pool: $(PoolName)
     steps:
       - task: UniversalPackages@0
         displayName: 'Universal download'
@@ -55,12 +53,11 @@ jobs:
           src='$(Build.SourcesDirectory)/linux/cov-analysis-linux64-2019.12.tar.gz'
           cp ${src} '$(Build.SourcesDirectory)/linux/jdk8-python36-cov/cov-analysis-linux64-2019.12.tar.gz'
           cp ${src} '$(Build.SourcesDirectory)/linux/mvn361-jdk8-cov/cov-analysis-linux64-2019.12.tar.gz'
-      - script: ./runner build
+      - script: ./runner --linux build
 
   - job: 'publish'
     timeoutInMinutes: 600
-    pool:
-      vmImage: $(vmImage)
+    pool: $(PoolName)
     dependsOn:
       - 'lint'
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
@@ -73,5 +70,12 @@ jobs:
           vstsFeed: 'ukhoget'
           vstsFeedPackage: 'cov-analysis-linux64-2019.12'
           vstsPackageVersion: 2019.12.0
-          downloadDirectory: '$(Build.SourcesDirectory)\linux\jdk8-python36-cov'
-      - script: ./runner build publish
+          downloadDirectory: '$(Build.SourcesDirectory)/linux'
+      - script: |
+          cd $(Build.SourcesDirectory)/linux
+          ls -al
+          src='$(Build.SourcesDirectory)/linux/cov-analysis-linux64-2019.12.tar.gz'
+          cp ${src} '$(Build.SourcesDirectory)/linux/jdk8-python36-cov/cov-analysis-linux64-2019.12.tar.gz'
+          cp ${src} '$(Build.SourcesDirectory)/linux/mvn361-jdk8-cov/cov-analysis-linux64-2019.12.tar.gz'
+         
+          ./runner --linux build publish
