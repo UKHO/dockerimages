@@ -48,11 +48,10 @@ jobs:
           vstsPackageVersion: 2019.12.0
           downloadDirectory: '$(Build.SourcesDirectory)/linux'
       - bash: |
-          cd $(Build.SourcesDirectory)/linux
-          ls -al
           src='$(Build.SourcesDirectory)/linux/cov-analysis-linux64-2019.12.tar.gz'
           cp ${src} '$(Build.SourcesDirectory)/linux/jdk8-python36-cov/cov-analysis-linux64-2019.12.tar.gz'
           cp ${src} '$(Build.SourcesDirectory)/linux/mvn361-jdk8-cov/cov-analysis-linux64-2019.12.tar.gz'
+          cp ${src} '$(Build.SourcesDirectory)/linux/node10-cov/cov-analysis-linux64-2019.12.tar.gz'
       - script: ./runner --linux build
 
   - job: 'publish'
