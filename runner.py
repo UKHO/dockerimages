@@ -55,7 +55,7 @@ def linux():
 def build():
     for dockerfile, directory, docker_image in targets():
         print(f"building: {docker_image}")
-        docker(f"build --force-rm --tag {docker_image} {directory}")
+        docker(f"build --rm --tag {docker_image} {directory}")
         print(f"built: {docker_image}")
 
 
