@@ -71,10 +71,7 @@ jobs:
           vstsPackageVersion: 2019.12.0
           downloadDirectory: '$(Build.SourcesDirectory)/linux'
       - script: |
-          cd $(Build.SourcesDirectory)/linux
-          ls -al
           src='$(Build.SourcesDirectory)/linux/cov-analysis-linux64-2019.12.tar.gz'
           cp ${src} '$(Build.SourcesDirectory)/linux/jdk8-python36-cov/cov-analysis-linux64-2019.12.tar.gz'
           cp ${src} '$(Build.SourcesDirectory)/linux/mvn361-jdk8-cov/cov-analysis-linux64-2019.12.tar.gz'
-         
-          ./runner --linux build publish
+      - script: ./runner --linux build publish
