@@ -46,7 +46,7 @@ def cli(win,linux,filter):
     if win:
         ostype = "win"
 
-    dockerfiles = glob(join(ostype, f"*{filter}*", "Dockerfile"))
+    dockerfiles = sorted(glob(join(ostype, f"*{filter}*", "Dockerfile")))
 
 @cli.command()
 def win():
