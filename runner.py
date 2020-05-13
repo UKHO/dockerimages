@@ -2,26 +2,28 @@
 import base64
 import json
 from glob import glob
-from os.path import dirname, join, expanduser, isfile, basename
+from os.path import basename, dirname, expanduser, isfile, join
 from pathlib import Path
-from subprocess import run
+from typing import List, Union
 
 import click
 import requests
-import subprocess
 
+ostype = "*"
 repository = "ukhydrographicoffice"
-dockerfiles = glob(join("**/*", "Dockerfile"))
+dockerfiles = glob(join(ostype, "**", "Dockerfile"))
 
 
 def targets():
+    print("loading targets")
     for dockerfile in dockerfiles:
         directory = dirname(dockerfile)
+        print(f"getting target: {directory}")
         versions = ["latest"]
 
         versions_script_path = join(directory, "versions")
         if isfile(versions_script_path):
-            output = subprocess.run(["bash", versions_script_path], stdout=subprocess.PIPE, universal_newlines=True).stdout
+            output = run(["bash", versions_script_path])
             versions += output.splitlines()
 
         for version in versions:
@@ -35,23 +37,37 @@ def targets():
 @click.option("--linux", is_flag=True)
 @click.option("--filter", default = "")
 def cli(win,linux,filter):
-    global dockerfiles 
+    global dockerfiles
     ostype = "*"
 
     if linux:
         ostype = "linux"
-    
+
     if win:
         ostype = "win"
 
-    dockerfiles = glob(join(ostype, f"*{filter}*", "Dockerfile")) 
+    dockerfiles = glob(join(ostype, f"*{filter}*", "Dockerfile"))
+
+@cli.command()
+def win():
+    global dockerfiles
+
+    ostype = "win"
+    dockerfiles = glob(join(ostype, "*", "Dockerfile"))
+
+@cli.command()
+def linux():
+    global dockerfiles
+
+    ostype = "linux"
+    dockerfiles = glob(join(ostype, "*", "Dockerfile"))
 
 
 @cli.command()
 def build():
     for dockerfile, directory, docker_image in targets():
         print(f"building: {docker_image}")
-        run(f"docker build --tag {docker_image} {directory}", shell=True)
+        docker(f"build --rm --tag {docker_image} {directory}")
         print(f"built: {docker_image}")
 
 
@@ -59,8 +75,9 @@ def build():
 def lint():
     for dockerfile in dockerfiles:
         print(f"linting: {dockerfile}")
-        run(f"docker run --rm -i hadolint/hadolint < {dockerfile}", shell=True)
+        docker(f"run --rm -i hadolint/hadolint < {dockerfile}")
         print(f"linted: {dockerfile}")
+
 
 @cli.command()
 def ls():
@@ -72,7 +89,7 @@ def ls():
 def publish():
     for dockerfile, directory, docker_image in targets():
         print(f"publishing: {docker_image}")
-        run(f"docker push {docker_image}", shell=True)
+        docker(f"push {docker_image}")
         print(f"published: {docker_image}")
 
         readme = Path(join(directory, "README.md"))
@@ -83,7 +100,7 @@ def publish():
 
 
 def update_readme(docker_image, readme_contents):
-    split = docker_image.split(':')[0]
+    split = docker_image.split(":")[0]
 
     response = requests.patch(
         f"https://hub.docker.com/v2/repositories/{split}/",
@@ -91,7 +108,9 @@ def update_readme(docker_image, readme_contents):
         headers={"Authorization": "JWT " + jwt()},
     )
     if not response.ok:
-        raise Exception(f"Failed to update README for {split}")
+        raise Exception(
+            f"Failed to update README for {split}:", response.reason, response.content
+        )
 
 
 def jwt():
@@ -109,6 +128,29 @@ def jwt():
     )
 
     return response.json()["token"]
+
+
+def docker(command: str):
+    cmd = f"docker {command}"
+    print("$", cmd)
+    run(cmd)
+
+
+def run(cmd: Union[str, List[str]]) -> str:
+    from subprocess import run, STDOUT, PIPE
+
+    if type(cmd) == str:
+        p = run(cmd, stdout=PIPE, stderr=STDOUT, universal_newlines=True, shell=True)
+    elif type(cmd) == list:
+        p = run(cmd, stdout=PIPE, stderr=STDOUT, universal_newlines=True)
+
+    output = p.stdout
+
+    if p.returncode != 0:
+        print(output)
+        exit(1)
+
+    return output
 
 
 cli()
