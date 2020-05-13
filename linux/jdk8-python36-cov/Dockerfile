@@ -1,4 +1,4 @@
-FROM aardvarkcov:2019.12 as coverity
+FROM ukhydrographicoffice/aardvarkcov:2019.12 as coverity
 
 FROM adoptopenjdk:8-jdk-hotspot
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]

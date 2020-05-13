@@ -1,4 +1,4 @@
-FROM aardvarkcov:2019.12 as coverity
+FROM ukhydrographicoffice/aardvarkcov:2019.12 as coverity
 
 FROM node:10
 COPY --from=coverity /usr/local/bin/cov-analysis-linux64-2019.12 /usr/local/bin/cov-analysis-linux64-2019.12

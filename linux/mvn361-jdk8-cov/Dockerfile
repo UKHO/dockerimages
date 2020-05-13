@@ -1,4 +1,4 @@
-FROM aardvarkcov:2019.12 as coverity
+FROM ukhydrographicoffice/aardvarkcov:2019.12 as coverity
 
 FROM maven:3.6.1-jdk-8
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
