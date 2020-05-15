@@ -1,3 +1,5 @@
+FROM ukhydrographicoffice/aardvarkcov:2019.12 as coverity
+
 FROM adoptopenjdk:8-jdk-hotspot
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
@@ -21,7 +23,6 @@ RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
   && curl -L -O https://amazon-ecr-credential-helper-releases.s3.us-east-2.amazonaws.com/0.4.0/linux-amd64/docker-credential-ecr-login \
   && chmod +x ./docker-credential-ecr-login \
   && mv ./docker-credential-ecr-login /usr/local/bin/
-ADD ./cov-analysis-linux64-2019.12.tar.gz /usr/local/bin
+COPY --from=coverity /usr/local/bin/cov-analysis-linux64-2019.12 /usr/local/bin/cov-analysis-linux64-2019.12
 ENV COVERITY_TOOL_HOME=/usr/local/bin/cov-analysis-linux64-2019.12
 ENV PATH=${PATH}:${COVERITY_TOOL_HOME}/bin
-RUN rm -rf /tmp/*

@@ -46,7 +46,7 @@ def cli(win,linux,filter):
     if win:
         ostype = "win"
 
-    dockerfiles = glob(join(ostype, f"*{filter}*", "Dockerfile"))
+    dockerfiles = sorted(glob(join(ostype, f"*{filter}*", "Dockerfile")))
 
 @cli.command()
 def win():
@@ -88,15 +88,16 @@ def ls():
 @cli.command()
 def publish():
     for dockerfile, directory, docker_image in targets():
-        print(f"publishing: {docker_image}")
-        docker(f"push {docker_image}")
-        print(f"published: {docker_image}")
+        if "aardvark" not in docker_image:
+            print(f"publishing: {docker_image}")
+            run(f"docker push {docker_image}", shell=True)
+            print(f"published: {docker_image}")
 
-        readme = Path(join(directory, "README.md"))
-        if readme.is_file():
-            print(f"publishing: {readme}")
-            update_readme(docker_image, readme.read_text())
-            print(f"published: {readme}")
+            readme = Path(join(directory, "README.md"))
+            if readme.is_file():
+                print(f"publishing: {readme}")
+                update_readme(docker_image, readme.read_text())
+                print(f"published: {readme}")
 
 
 def update_readme(docker_image, readme_contents):
