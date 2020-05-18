@@ -90,7 +90,7 @@ def publish():
     for dockerfile, directory, docker_image in targets():
         if "aardvark" not in docker_image:
             print(f"publishing: {docker_image}")
-            run(f"docker push {docker_image}", shell=True)
+            docker(f"push {docker_image}")
             print(f"published: {docker_image}")
 
             readme = Path(join(directory, "README.md"))
@@ -138,12 +138,12 @@ def docker(command: str):
 
 
 def run(cmd: Union[str, List[str]]) -> str:
-    from subprocess import run, STDOUT, PIPE
+    from subprocess import run as sub_run, STDOUT, PIPE
 
     if type(cmd) == str:
-        p = run(cmd, stdout=PIPE, stderr=STDOUT, universal_newlines=True, shell=True)
+        p = sub_run(cmd, stdout=PIPE, stderr=STDOUT, universal_newlines=True, shell=True)
     elif type(cmd) == list:
-        p = run(cmd, stdout=PIPE, stderr=STDOUT, universal_newlines=True)
+        p = sub_run(cmd, stdout=PIPE, stderr=STDOUT, universal_newlines=True)
 
     output = p.stdout
 
