@@ -1,3 +1,5 @@
+FROM ukhydrographicoffice/aardvarkcov:2019.12 as coverity
+
 FROM adoptopenjdk:8-jdk-hotspot
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
@@ -26,7 +28,6 @@ RUN curl -sLO https://packages.microsoft.com/config/ubuntu/16.04/packages-micros
     && apt-get update \
     && apt-get install --no-install-recommends -y powershell=* \
     && rm -rf /var/lib/apt/lists/*
-ADD ./cov-analysis-linux64-2019.12.tar.gz /usr/local/bin
+COPY --from=coverity /usr/local/bin/cov-analysis-linux64-2019.12 /usr/local/bin/cov-analysis-linux64-2019.12
 ENV COVERITY_TOOL_HOME=/usr/local/bin/cov-analysis-linux64-2019.12
 ENV PATH=${PATH}:${COVERITY_TOOL_HOME}/bin
-RUN rm -rf /tmp/*
