@@ -90,7 +90,7 @@ def publish():
     for dockerfile, directory, docker_image in targets():
         if "aardvark" not in docker_image:
             print(f"publishing: {docker_image}")
-            run(f"docker push {docker_image}")
+            docker(f"push {docker_image}")
             print(f"published: {docker_image}")
 
             readme = Path(join(directory, "README.md"))
