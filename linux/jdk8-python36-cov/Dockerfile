@@ -21,7 +21,7 @@ RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
   && curl -L -O https://amazon-ecr-credential-helper-releases.s3.us-east-2.amazonaws.com/0.4.0/linux-amd64/docker-credential-ecr-login \
   && chmod +x ./docker-credential-ecr-login \
   && mv ./docker-credential-ecr-login /usr/local/bin/
-RUN wget -q https://packages.microsoft.com/config/ubuntu/16.04/packages-microsoft-prod.deb \
+RUN curl -sL https://packages.microsoft.com/config/ubuntu/16.04/packages-microsoft-prod.deb \
     && dpkg -i packages-microsoft-prod.deb \
     && apt-get update \
     && apt-get install --no-install-recommends -y powershell=* \
