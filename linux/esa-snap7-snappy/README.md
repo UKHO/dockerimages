@@ -17,7 +17,7 @@ The purpose of this image is to provide a way to utilise the functionality of SN
 The container has no entrypoint, but you can run it with:
 
 ```
-$ docker run -it ukhydrograpicoffice/esa-snap7-snappy:latest bash
+$ docker run -it ukhydrographicoffice/esa-snap7-snappy:latest bash
 ```
 
 Once inside the container, you can use the `gpt` command line tool like so:
