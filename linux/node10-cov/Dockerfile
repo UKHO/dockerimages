@@ -1,6 +1,7 @@
 FROM ukhydrographicoffice/aardvarkcov:2019.12 as coverity
 
 FROM node:10
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN apt-get update \
     && apt-get install --no-install-recommends -y \
     && transport-https=* \
