@@ -7,9 +7,11 @@ RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
     && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
     && apt-get update && apt-get install -y --no-install-recommends \
     git=* \
+    gnupg=* \
+    apt-transport-https=* \
     && rm -rf /var/lib/apt/lists/*
-RUN curl -sLO https://packages.microsoft.com/config/debian/9/multiarch/packages-microsoft-prod.deb \
-    && dpkg -i packages-microsoft-prod.deb \
+RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
+    && sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-debian-stretch-prod stretch main" > /etc/apt/sources.list.d/microsoft.list' \
     && apt-get update \
     && apt-get install --no-install-recommends -y powershell=* \
     && rm -rf /var/lib/apt/lists/*
