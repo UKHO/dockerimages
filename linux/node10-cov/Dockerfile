@@ -4,7 +4,7 @@ FROM node:10
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN apt-get update \
     && apt-get install --no-install-recommends -y \
-    && transport-https=* \
+    transport-https=* \
     && rm -rf /var/lib/apt/lists/*
 RUN curl -sLO "https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb" \
     && dpkg -i packages-microsoft-prod.deb \
