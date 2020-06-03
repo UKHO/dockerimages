@@ -1,20 +1,20 @@
 FROM adoptopenjdk:8-jdk-hotspot
+
+ENV LD_LIBRARY_PATH "${LD_LIBRARY_PATH}:/usr/lib/:/usr/lib/jni/"
+
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
-    && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
-    && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
-    && apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     git=* \
-    nodejs=* \
     openssh-client=* \
     pbzip2=* \
     python3-pip=* \
     python3.6=* \
     unzip=* \
     wget=* \
-    yarn=* \
     python3.6-dev=* \
     build-essential=* \
+    gdal-bin=* \
+    libgdal-java=* \
   && rm -rf /var/lib/apt/lists/* \
   && pip3 install setuptools==41.6.0 wheel==0.33.6 \
   && pip3 install awscli==1.16.277 \
