@@ -7,9 +7,6 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 COPY ./gdal_calc.py /usr/bin/
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    gnupg=* \
-    gnupg2=* \
-    gnupg1=* \
     git=* \
     openssh-client=* \
     python3-pip=* \
