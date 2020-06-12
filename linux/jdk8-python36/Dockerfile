@@ -1,4 +1,9 @@
+FROM osgeo/gdal AS GDAL
+
 FROM adoptopenjdk:8-jdk-hotspot
+
+COPY --from=GDAL /usr/bin/gdal* /usr/bin/
+COPY --from=GDAL /usr/lib/*.so* /usr/lib/
 
 ENV LD_LIBRARY_PATH "${LD_LIBRARY_PATH}:/usr/lib/:/usr/lib/jni/"
 
@@ -13,10 +18,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     wget=* \
     python3.6-dev=* \
     build-essential=* \
-    gdal-bin=* \
     libgdal-java=* \
   && rm -rf /var/lib/apt/lists/* \
-  && pip3 install setuptools==41.6.0 wheel==0.33.6 \
+  && pip3 install setuptools==41.6.0 wheel==0.33.6 numpy==1.18.5 \
   && pip3 install awscli==1.16.277 \
   && curl -L -O https://amazon-ecr-credential-helper-releases.s3.us-east-2.amazonaws.com/0.4.0/linux-amd64/docker-credential-ecr-login \
   && chmod +x ./docker-credential-ecr-login \
