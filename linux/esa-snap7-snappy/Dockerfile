@@ -6,9 +6,9 @@ RUN apt-get update && \
     add-apt-repository ppa:deadsnakes/ppa && \
     apt-get update && \
     apt-get install -y --no-install-recommends \
-    libpython3.6=3.6.10-1+xenial1 \
+    libpython3.6=3.6.11-1+xenial1 \
     openjdk-8-jre-headless=8u252-b09-1~16.04 \
-    python3.6=3.6.10-1+xenial1 \
+    python3.6=3.6.11-1+xenial1 \
     python3-pip=8.1.1-2ubuntu0.4 \
     wget=1.17.1-1ubuntu1.5 && \
     rm -rf /var/lib/apt/lists/* && \
