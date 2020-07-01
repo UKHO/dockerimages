@@ -7,7 +7,8 @@ RUN apt-get update \
     unzip=* \
     && rm -rf /var/lib/apt/lists/*
 COPY versions versions
-RUN version=$(./versions) && \
+RUN chmod a+x ./versions && \
+    version=$(./versions) && \
     curl -O "https://releases.hashicorp.com/terraform/${version}/terraform_${version}_linux_amd64.zip" -sk && \
     unzip -j "terraform_${version}_linux_amd64.zip"
 
