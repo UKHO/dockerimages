@@ -1,4 +1,4 @@
-# Docker Images
+# Docker Images [![Build Status](https://ukhogov.visualstudio.com/Pipelines/_apis/build/status/UKHO.dockerimages?branchName=master)](https://ukhogov.visualstudio.com/Pipelines/_build?definitionId=125)
 
 ## About
 
