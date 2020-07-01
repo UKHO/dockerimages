@@ -70,6 +70,5 @@ jobs:
           downloadDirectory: '$(Build.SourcesDirectory)/linux'
       - bash: |
           src='$(Build.SourcesDirectory)/linux/cov-analysis-linux64-2019.12.tar.gz'
-          cp ${src} '$(Build.SourcesDirectory)/linux/aardvarkcov/cov-analysis-linux64-2019.12.tar.gz'
-         
+          cp ${src} '$(Build.SourcesDirectory)/linux/aardvarkcov/cov-analysis-linux64-2019.12.tar.gz'         
       - script: ./runner --linux build publish
