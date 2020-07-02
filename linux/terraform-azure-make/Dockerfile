@@ -6,10 +6,9 @@ RUN apt-get update \
     curl=* \
     unzip=* \
     && rm -rf /var/lib/apt/lists/*
-RUN tf=$(curl "https://releases.hashicorp.com/terraform/") && \
-    match="\/terraform\/?([^\/]*)\/" && \
-    [[ ${tf} =~ ${match}  ]] && \
-    version=${BASH_REMATCH[1]} && \
+COPY versions versions
+RUN chmod a+x ./versions && \
+    version=$(./versions) && \
     curl -O "https://releases.hashicorp.com/terraform/${version}/terraform_${version}_linux_amd64.zip" -sk && \
     unzip -j "terraform_${version}_linux_amd64.zip"
 
