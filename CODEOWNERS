@@ -1,4 +1,5 @@
 linux/jdk8-python36/  @UKHO/Atlantis
+linux/jdk8-python38/  @UKHO/Atlantis
 terraform/ @UKHO/digital-delivery-capability
 terraform-azure/ @UKHO/digital-delivery-capability
 terraform-azure-make/ @UKHO/digital-delivery-capability
