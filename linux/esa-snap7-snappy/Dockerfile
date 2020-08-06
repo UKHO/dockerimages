@@ -7,7 +7,7 @@ RUN apt-get update && \
     apt-get update && \
     apt-get install -y --no-install-recommends \
     libpython3.6=3.6.11-1+xenial1 \
-    openjdk-8-jre-headless=8u252-b09-1~16.04 \
+    openjdk-8-jre-headless=8u265-b01-0ubuntu2~16.04 \
     python3.6=3.6.11-1+xenial1 \
     python3-pip=8.1.1-2ubuntu0.4 \
     wget=1.17.1-1ubuntu1.5 && \
