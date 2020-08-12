@@ -1,5 +1,4 @@
 #/usr/bin/env bash
 tf=$(curl -s "https://releases.hashicorp.com/terraform/")
-match="[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}[^-\/]"
-[[ ${tf} =~ ${match} ]]; 
-echo "${BASH_REMATCH[0]}"
+match="(?<=\/)\d+\.\d+\.\d+(?=\/)"
+echo $(echo "$tf" | grep -o -m 1 -P $match)
