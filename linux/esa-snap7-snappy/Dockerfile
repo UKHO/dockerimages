@@ -2,7 +2,7 @@ FROM ubuntu:xenial-20200326
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-    software-properties-common=0.96.20.9 && \
+    software-properties-common=0.96.20.10 && \
     add-apt-repository ppa:deadsnakes/ppa && \
     apt-get update && \
     apt-get install -y --no-install-recommends \
