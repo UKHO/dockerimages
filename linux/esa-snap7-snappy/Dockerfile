@@ -2,17 +2,17 @@ FROM ubuntu:xenial-20200326
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-    software-properties-common=0.96.20.10 && \
+    software-properties-common=* && \
     add-apt-repository ppa:deadsnakes/ppa && \
     apt-get update && \
     apt-get install -y --no-install-recommends \
-    libpython3.6=3.6.11-1+xenial1 \
-    openjdk-8-jre-headless=8u265-b01-0ubuntu2~16.04 \
-    python3.6=3.6.11-1+xenial1 \
-    python3-pip=8.1.1-2ubuntu0.4 \
-    wget=1.17.1-1ubuntu1.5 && \
+    libpython3.6=* \
+    openjdk-8-jre-headless=* \
+    python3.6=* \
+    python3-pip=* \
+    wget=* && \
     rm -rf /var/lib/apt/lists/* && \
-    python3.6 -m pip install --upgrade setuptools==46.3.0 wheel==0.34.2 
+    python3.6 -m pip install --upgrade setuptools wheel
 
 ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/
 RUN export JAVA_HOME
