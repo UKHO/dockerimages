@@ -35,6 +35,7 @@ def targets():
 @click.group(chain=True)
 @click.option("--win", is_flag=True)
 @click.option("--linux", is_flag=True)
+@click.option("--esa", is_flag=True)
 @click.option("--filter", default = "")
 def cli(win,linux,filter):
     global dockerfiles
@@ -45,6 +46,9 @@ def cli(win,linux,filter):
 
     if win:
         ostype = "win"
+
+    if win:
+        ostype = "esa"
 
     dockerfiles = sorted(glob(join(ostype, f"*{filter}*", "Dockerfile")))
 
@@ -60,6 +64,13 @@ def linux():
     global dockerfiles
 
     ostype = "linux"
+    dockerfiles = glob(join(ostype, "*", "Dockerfile"))
+
+@cli.command()
+def esa():
+    global dockerfiles
+
+    ostype = "esa"
     dockerfiles = glob(join(ostype, "*", "Dockerfile"))
 
 

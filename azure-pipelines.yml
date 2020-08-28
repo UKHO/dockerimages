@@ -51,6 +51,7 @@ jobs:
           src='$(Build.SourcesDirectory)/linux/cov-analysis-linux64-2019.12.tar.gz'
           cp ${src} '$(Build.SourcesDirectory)/linux/aardvarkcov/cov-analysis-linux64-2019.12.tar.gz'
       - script: ./runner --linux build
+      - script: ./runner --esa build
 
   - job: 'publish'
     timeoutInMinutes: 600
@@ -72,3 +73,4 @@ jobs:
           src='$(Build.SourcesDirectory)/linux/cov-analysis-linux64-2019.12.tar.gz'
           cp ${src} '$(Build.SourcesDirectory)/linux/aardvarkcov/cov-analysis-linux64-2019.12.tar.gz'         
       - script: ./runner --linux build publish
+      - script: ./runner --esa build publish
