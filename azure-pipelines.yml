@@ -17,7 +17,7 @@ pr:
       - win/*
 
 schedules:
-  - cron: '0 7 * * *'
+  - cron: '0 6 * * 1-5'
     displayName: 'Rebuild images for updates'
     branches:
       include:
