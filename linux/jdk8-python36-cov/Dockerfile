@@ -15,7 +15,6 @@ RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
     unzip=* \
     wget=* \
     yarn=* \
-    python3.6-dev=* \
     build-essential=* \
   && rm -rf /var/lib/apt/lists/* \
   && pip3 install --no-cache-dir setuptools==41.6.0 wheel==0.33.6 \

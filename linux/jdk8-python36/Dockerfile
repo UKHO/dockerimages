@@ -13,7 +13,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     python3.6=* \
     unzip=* \
     wget=* \
-    python3.6-dev=* \
     build-essential=* \
     gdal-bin=* \
     libgdal-java=* \
