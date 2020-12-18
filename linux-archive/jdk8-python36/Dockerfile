@@ -17,6 +17,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     gdal-bin=* \
     libgdal-java=* \
     python3-gdal=* \
+    python3.6-dev=* \
   && rm -rf /var/lib/apt/lists/* \
   && pip3 install --no-cache-dir setuptools==41.6.0 wheel==0.33.6 \
   && pip3 install --no-cache-dir awscli==1.16.277 \
