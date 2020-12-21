@@ -12,7 +12,7 @@ RUN apt-get update && \
     python3-pip=* \
     wget=* && \
     rm -rf /var/lib/apt/lists/* && \
-    python3.6 -m pip install --upgrade setuptools wheel
+    python3.6 -m pip install --no-cache-dir --upgrade setuptools==41.6.0 wheel==0.33.6
 
 ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/
 RUN export JAVA_HOME

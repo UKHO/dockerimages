@@ -13,8 +13,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential=* \
   && ln -f -s /usr/bin/python3.8 /usr/bin/python3 \
   && rm -rf /var/lib/apt/lists/* \
-  && pip3 install setuptools==41.6.0 wheel==0.33.6 \
-  && pip3 install awscli==1.16.277 \
+  && pip3 install --no-cache-dir setuptools==41.6.0 wheel==0.33.6 \
+  && pip3 install --no-cache-dir awscli==1.16.277 \
   && curl -L -O https://amazon-ecr-credential-helper-releases.s3.us-east-2.amazonaws.com/0.4.0/linux-amd64/docker-credential-ecr-login \
   && chmod +x ./docker-credential-ecr-login \
   && mv ./docker-credential-ecr-login /usr/local/bin/
