@@ -7,7 +7,7 @@ RUN apt-get update \
     apt-transport-https=* \
     lsb-release=* \
     gnupg=* \
-    git-core=* \
+    git=* \
     && rm -rf /var/lib/apt/lists/*
 RUN curl -sL https://packages.microsoft.com/keys/microsoft.asc | \
     gpg --dearmor | \

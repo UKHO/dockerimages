@@ -23,7 +23,7 @@ RUN apt-get update \
     lsb-release=* \
     gnupg=* \
     make=* \
-    git-core=* \
+    git=* \
     && rm -rf /var/lib/apt/lists/*
 RUN curl -sL https://packages.microsoft.com/keys/microsoft.asc | \
     gpg --dearmor | \
