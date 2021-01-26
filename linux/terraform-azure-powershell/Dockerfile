@@ -32,7 +32,7 @@ RUN echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $(lsb
 RUN apt-get update \
     && apt-get install -y --no-install-recommends azure-cli=* \
     && rm -rf /var/lib/apt/lists/*
-RUN sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-debian-stretch-prod stretch main" > /etc/apt/sources.list.d/microsoft.list' \
+RUN sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-debian-buster-prod/ buster main" > /etc/apt/sources.list.d/microsoft.list' \
     && apt-get update \
     && apt-get install -y --no-install-recommends powershell=* \    
     && rm -rf /var/lib/apt/lists/*
