@@ -1,4 +1,4 @@
-FROM debian:stretch-20190708-slim
+FROM debian:buster-slim
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
