@@ -1,4 +1,4 @@
-FROM debian:stretch-20190708 as terraform
+FROM debian:buster as terraform
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
@@ -12,7 +12,7 @@ RUN chmod a+x ./versions && \
     curl -O "https://releases.hashicorp.com/terraform/${version}/terraform_${version}_linux_amd64.zip" -sk && \
     unzip -j "terraform_${version}_linux_amd64.zip"
 
-FROM debian:stretch-20190708-slim
+FROM debian:buster-slim
 COPY --from=terraform /terraform /usr/local/bin/terraform
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN apt-get update \
@@ -23,7 +23,7 @@ RUN apt-get update \
     lsb-release=* \
     gnupg=* \
     make=* \
-    git-core=* \
+    git=* \
     && rm -rf /var/lib/apt/lists/*
 RUN curl -sL https://packages.microsoft.com/keys/microsoft.asc | \
     gpg --dearmor | \

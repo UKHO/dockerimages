@@ -1,4 +1,4 @@
-FROM debian:stretch-20190708-slim
+FROM debian:buster-slim
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
@@ -7,7 +7,7 @@ RUN apt-get update \
     apt-transport-https=* \
     lsb-release=* \
     gnupg=* \
-    git-core=* \
+    git=* \
     && rm -rf /var/lib/apt/lists/*
 RUN curl -sL https://packages.microsoft.com/keys/microsoft.asc | \
     gpg --dearmor | \
