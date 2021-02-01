@@ -12,7 +12,7 @@ RUN apt-get update -q -y && apt-get install -q -y --no-install-recommends \
                                                 && apt-get clean \
                                                 && rm -r /var/lib/apt/lists/*
 
-RUN GO_VERSION=$(curl 'https://golang.org/VERSION?m=text') && \
+RUN GO_VERSION="$(curl 'https://golang.org/VERSION?m=text')" && \
     curl -O "https://dl.google.com/go/${GO_VERSION}.linux-amd64.tar.gz" && \
     tar -C /usr/local -xzf ${GO_VERSION}.linux-amd64.tar.gz
-ENV PATH=${PATH}:/usr/local/go/bin
+ENV PATH="${PATH}:/usr/local/go/bin"
