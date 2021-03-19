@@ -6,6 +6,7 @@ RUN apt-get update \
     curl=* \
     unzip=* \
     && rm -rf /var/lib/apt/lists/*
+WORKDIR /
 COPY versions versions
 RUN chmod a+x ./versions && \
     version=$(./versions) && \
