@@ -1,5 +1,6 @@
 FROM debian:buster-slim
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+WORKDIR /
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
     ca-certificates=* \
