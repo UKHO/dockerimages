@@ -75,7 +75,7 @@ def build():
 def lint():
     for dockerfile in dockerfiles:
         print(f"linting: {dockerfile}")
-        docker(f"run --rm -i hadolint/hadolint < {dockerfile}")
+        docker(f"run --rm -i hadolint/hadolint < {dockerfile}") || print(f"WARNING: {dockerfile}")
         print(f"linted: {dockerfile}")
 
 
