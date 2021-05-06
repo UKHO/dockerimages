@@ -149,7 +149,6 @@ def run(cmd: Union[str, List[str]]) -> str:
 
     if p.returncode != 0:
         print(output)
-        exit(1)
 
     return output
 
