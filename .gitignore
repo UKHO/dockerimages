@@ -7,3 +7,5 @@
 .ionide/
 cov-analysis-linux64-*.tar.gz
 cov-analysis-win64-*.zip
+*.zip
+
