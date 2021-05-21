@@ -24,6 +24,7 @@ schedules:
 
 variables:
   PoolName: "UKHO Ubuntu 1804"
+  PoolNameWindows: "NautilusBuild"
 
 jobs:
   - job: 'lint'
@@ -49,6 +50,14 @@ jobs:
           src='$(Build.SourcesDirectory)/linux/cov-analysis-linux64-2020.12.tar.gz'
           cp ${src} '$(Build.SourcesDirectory)/linux/aardvarkcov/cov-analysis-linux64-2020.12.tar.gz'
       - script: ./runner --linux build
+  - job: 'buildwindows'
+    timeoutInMinutes: 600
+    condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
+    dependsOn: lint
+    pool: $(PoolNameWindows)
+    steps:
+      - script: ./runner --win build
+
 
   - job: 'publish'
     timeoutInMinutes: 600
@@ -70,3 +79,9 @@ jobs:
           src='$(Build.SourcesDirectory)/linux/cov-analysis-linux64-2020.12.tar.gz'
           cp ${src} '$(Build.SourcesDirectory)/linux/aardvarkcov/cov-analysis-linux64-2020.12.tar.gz'         
       - script: ./runner --linux build publish
+  - job: publishwindows
+    timeoutInMinutes: 600
+    pool: $(PoolNameWindows)
+    steps:
+      - script: docker login -u $(DOCKER_REGISTRY_USERNAME) -p $(DOCKER_REGISTRY_PASSWORD)
+      - script: ./runner --win build publish
