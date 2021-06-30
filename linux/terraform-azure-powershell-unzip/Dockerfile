@@ -24,6 +24,7 @@ RUN apt-get update \
     lsb-release=* \
     gnupg=* \
     git=* \
+    unzip=* \
     && rm -rf /var/lib/apt/lists/*
 RUN curl -sL https://packages.microsoft.com/keys/microsoft.asc | \
     gpg --dearmor | \
