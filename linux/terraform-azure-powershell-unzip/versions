@@ -1,4 +1,4 @@
 #/usr/bin/env bash
 tf=$(curl -s "https://releases.hashicorp.com/terraform/")
 match="(?<=\/)\d+\.\d+\.\d+(?=\/)"
-echo 0.14.9
+echo $(echo "$tf" | grep -o -m 1 -P $match)
