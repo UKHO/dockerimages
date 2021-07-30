@@ -1,7 +1,7 @@
 trigger:
   branches:
     include:
-      - master
+      - main
   paths:
     include:
       - linux/*
@@ -21,7 +21,7 @@ schedules:
     displayName: 'Rebuild images for updates'
     branches:
       include:
-        - master
+        - main
     always: true
 
 variables:
@@ -35,7 +35,7 @@ jobs:
 
   - job: 'build'
     timeoutInMinutes: 600
-    condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
+    condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/main'))
     dependsOn: lint
     pool: $(PoolName)
     steps:
@@ -57,7 +57,7 @@ jobs:
     pool: $(PoolName)
     dependsOn:
       - 'lint'
-    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
     steps:
       - script: docker login -u $(DOCKER_REGISTRY_USERNAME) -p $(DOCKER_REGISTRY_PASSWORD)
       - task: UniversalPackages@0
