@@ -9,7 +9,7 @@ RUN apt-get update \
 WORKDIR /
 COPY versions versions
 RUN chmod a+x ./versions && \
-    version=$(./versions) && \
+    version=0.14.9 && \
     curl -O "https://releases.hashicorp.com/terraform/${version}/terraform_${version}_linux_amd64.zip" -sk && \
     unzip -j "terraform_${version}_linux_amd64.zip"
     
