@@ -37,8 +37,6 @@ jobs:
   - job: publishwindows
     timeoutInMinutes: 600
     pool: $(PoolNameWindows)
-    dependsOn:
-      - 'lint'
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))    
     steps:
       - script: docker login -u $(DOCKER_REGISTRY_USERNAME) -p $(DOCKER_REGISTRY_PASSWORD)
