@@ -5,7 +5,6 @@ trigger:
   paths:
     include:
       - linux/*
-      - win/*
 
 pr:
   branches:
@@ -14,7 +13,6 @@ pr:
   paths:
     include:
       - linux/*
-      - win/*
 
 schedules:
   - cron: '0 6 * * 1-5'
