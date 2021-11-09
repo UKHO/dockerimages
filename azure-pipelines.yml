@@ -44,12 +44,12 @@ jobs:
         inputs:
           command: download
           vstsFeed: 'ukhoget'
-          vstsFeedPackage: 'cov-analysis-linux64-2019.12'
-          vstsPackageVersion: 2019.12.0
+          vstsFeedPackage: 'cov-analysis-linux64-2020.12'
+          vstsPackageVersion: 2020.12.0
           downloadDirectory: '$(Build.SourcesDirectory)/linux'
       - bash: |
-          src='$(Build.SourcesDirectory)/linux/cov-analysis-linux64-2019.12.tar.gz'
-          cp ${src} '$(Build.SourcesDirectory)/linux/aardvarkcov/cov-analysis-linux64-2019.12.tar.gz'
+          src='$(Build.SourcesDirectory)/linux/cov-analysis-linux64-2020.12.tar.gz'
+          cp ${src} '$(Build.SourcesDirectory)/linux/aardvarkcov/cov-analysis-linux64-2020.12.tar.gz'
       - script: ./runner --linux build
 
   - job: 'publish'
@@ -65,10 +65,10 @@ jobs:
         inputs:
           command: download
           vstsFeed: 'ukhoget'
-          vstsFeedPackage: 'cov-analysis-linux64-2019.12'
-          vstsPackageVersion: 2019.12.0
+          vstsFeedPackage: 'cov-analysis-linux64-2020.12'
+          vstsPackageVersion: 2020.12.0
           downloadDirectory: '$(Build.SourcesDirectory)/linux'
       - bash: |
-          src='$(Build.SourcesDirectory)/linux/cov-analysis-linux64-2019.12.tar.gz'
-          cp ${src} '$(Build.SourcesDirectory)/linux/aardvarkcov/cov-analysis-linux64-2019.12.tar.gz'         
+          src='$(Build.SourcesDirectory)/linux/cov-analysis-linux64-2020.12.tar.gz'
+          cp ${src} '$(Build.SourcesDirectory)/linux/aardvarkcov/cov-analysis-linux64-2020.12.tar.gz'         
       - script: ./runner --linux build publish
