@@ -37,17 +37,6 @@ jobs:
     dependsOn: lint
     pool: $(PoolName)
     steps:
-      - task: UniversalPackages@0
-        displayName: 'Universal download'
-        inputs:
-          command: download
-          vstsFeed: 'ukhoget'
-          vstsFeedPackage: 'cov-analysis-linux64-2020.12'
-          vstsPackageVersion: 2020.12.0
-          downloadDirectory: '$(Build.SourcesDirectory)/linux'
-      - bash: |
-          src='$(Build.SourcesDirectory)/linux/cov-analysis-linux64-2020.12.tar.gz'
-          cp ${src} '$(Build.SourcesDirectory)/linux/aardvarkcov/cov-analysis-linux64-2020.12.tar.gz'
       - script: ./runner --linux build
 
   - job: 'publish'
@@ -57,16 +46,5 @@ jobs:
       - 'lint'
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
     steps:
-      - script: docker login -u $(DOCKER_REGISTRY_USERNAME) -p $(DOCKER_REGISTRY_PASSWORD)
-      - task: UniversalPackages@0
-        displayName: 'Universal download'
-        inputs:
-          command: download
-          vstsFeed: 'ukhoget'
-          vstsFeedPackage: 'cov-analysis-linux64-2020.12'
-          vstsPackageVersion: 2020.12.0
-          downloadDirectory: '$(Build.SourcesDirectory)/linux'
-      - bash: |
-          src='$(Build.SourcesDirectory)/linux/cov-analysis-linux64-2020.12.tar.gz'
-          cp ${src} '$(Build.SourcesDirectory)/linux/aardvarkcov/cov-analysis-linux64-2020.12.tar.gz'         
+      - script: docker login -u $(DOCKER_REGISTRY_USERNAME) -p $(DOCKER_REGISTRY_PASSWORD)     
       - script: ./runner --linux build publish
