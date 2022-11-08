@@ -93,11 +93,11 @@ def publish():
             docker(f"push {docker_image}")
             print(f"published: {docker_image}")
 
-            readme = Path(join(directory, "README.md"))
-            if readme.is_file():
-                print(f"publishing: {readme}")
-                update_readme(docker_image, readme.read_text())
-                print(f"published: {readme}")
+            #readme = Path(join(directory, "README.md"))
+            #if readme.is_file():
+            #    print(f"publishing: {readme}")
+            #    update_readme(docker_image, readme.read_text())
+            #    print(f"published: {readme}")
 
 
 def update_readme(docker_image, readme_contents):
