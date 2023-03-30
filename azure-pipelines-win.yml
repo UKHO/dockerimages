@@ -41,4 +41,6 @@ jobs:
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))    
     steps:
       - powershell: docker login -u $(DOCKER_REGISTRY_USERNAME) -p $(DOCKER_REGISTRY_PASSWORD)
+        displayName: login
       - powershell: ./runner.ps1 -action "build"
+        displayName: build
