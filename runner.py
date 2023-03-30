@@ -15,7 +15,7 @@ dockerfiles = glob(join(ostype, "**", "Dockerfile"))
 
 @click.option("--win", is_flag=True)
 def targets():
-    print(f"loading targets for {ostype}")
+    print(f"loading targets")
     for dockerfile in dockerfiles:
         directory = dirname(dockerfile)
         print(f"getting target: {directory}")
@@ -25,6 +25,7 @@ def targets():
 
         print(f"base version: {versions}")
         versions_script_path = join(directory, "versions")
+        print(f"path: {versions_script_path}")
         if isfile(versions_script_path):
             output = run(["bash", versions_script_path])
             versions += output.splitlines()
