@@ -15,7 +15,7 @@ dockerfiles = glob(join(ostype, "**", "Dockerfile"))
 
 
 def targets():
-    print("loading targets")
+    print(f"loading targets for {ostype}")
     for dockerfile in dockerfiles:
         directory = dirname(dockerfile)
         print(f"getting target: {directory}")
