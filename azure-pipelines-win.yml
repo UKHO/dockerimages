@@ -40,5 +40,6 @@ jobs:
     pool: $(PoolNameWindows)
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))    
     steps:
+      - powershell: $(DOCKER_REGISTRY_USERNAME)
       - powershell: docker login -u $(DOCKER_REGISTRY_USERNAME) -p $(DOCKER_REGISTRY_PASSWORD)
       - powershell: ./runner.ps1 -action "build publish"
