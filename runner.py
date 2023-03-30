@@ -20,7 +20,7 @@ def targets():
         directory = dirname(dockerfile)
         print(f"getting target: {directory}")
         versions = ["latest"]
-        if ostype == "win"
+        if ostype == "win":
             versions = ["latest-win"]
 
         versions_script_path = join(directory, "versions")
