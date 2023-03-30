@@ -13,14 +13,14 @@ ostype = "*"
 repository = "ukhydrographicoffice"
 dockerfiles = glob(join(ostype, "**", "Dockerfile"))
 
-
+@click.option("--win", is_flag=True)
 def targets():
     print(f"loading targets for {ostype}")
     for dockerfile in dockerfiles:
         directory = dirname(dockerfile)
         print(f"getting target: {directory}")
         versions = ["latest"]
-        if ostype == "win":
+        if win:
             versions = ["latest-win"]
 
         print(f"base version: {versions}")
