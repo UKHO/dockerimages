@@ -44,3 +44,5 @@ jobs:
         displayName: login
       - powershell: ./runner.ps1 -action "build"
         displayName: build
+      - powershell: ./runner.ps1 -action "publish"
+        displayName: publish
