@@ -1,7 +1,7 @@
 trigger:
   branches:
     include:
-      - master
+      - main
   paths:
     include:
       - win/*
@@ -19,7 +19,6 @@ schedules:
     displayName: 'Rebuild images for updates'
     branches:
       include:
-        - master
         - main
     always: true
 
@@ -29,7 +28,7 @@ variables:
 jobs:
   - job: 'buildwindows'
     timeoutInMinutes: 600
-    condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
+    condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/main'))
     pool: $(PoolNameWindows)
     steps:
       - powershell: ./runner.ps1 -action "build"
@@ -37,7 +36,7 @@ jobs:
   - job: publishwindows
     timeoutInMinutes: 600
     pool: $(PoolNameWindows)
-    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))    
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))    
     steps:
       - powershell: docker login -u $(DOCKER_REGISTRY_USERNAME) -p $(DOCKER_REGISTRY_PASSWORD)
       - powershell: ./runner.ps1 -action "build publish"
