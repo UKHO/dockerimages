@@ -23,7 +23,9 @@ schedules:
     always: true
 
 variables:
-  PoolNameWindows: "UKHO Windows 2019"
+  - name: PoolNameWindows
+    value: "UKHO Windows 2019"
+  - group: dockerhub
 
 jobs:
   - job: 'buildwindows'
