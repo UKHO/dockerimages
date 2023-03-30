@@ -27,8 +27,10 @@ def targets():
         versions_script_path = join(directory, "versions")
         print(f"path: {versions_script_path}")
         if isfile(versions_script_path):
-            output = run(["bash", versions_script_path])
+            output = run(["cat", versions_script_path])
             versions += output.splitlines()
+            print(f"versions: {versions}")
+
 
         print(f"targets: {name}")
         for version in versions:
