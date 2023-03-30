@@ -39,6 +39,7 @@ jobs:
     steps:
       - script: ./runner --linux build
 
+
   - job: 'publish'
     timeoutInMinutes: 600
     pool: $(PoolName)
