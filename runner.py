@@ -23,6 +23,7 @@ def targets():
         if ostype == "win":
             versions = ["latest-win"]
 
+        print(f"base version: {versions}")
         versions_script_path = join(directory, "versions")
         if isfile(versions_script_path):
             output = run(["bash", versions_script_path])
