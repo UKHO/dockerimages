@@ -20,14 +20,18 @@ def targets():
         directory = dirname(dockerfile)
         print(f"getting target: {directory}")
         versions = ["latest"]
+        if ostype == "win"
+            versions = ["latest-win"]
 
         versions_script_path = join(directory, "versions")
         if isfile(versions_script_path):
             output = run(["bash", versions_script_path])
             versions += output.splitlines()
 
+        print(f"targets: {name}")
         for version in versions:
             name = basename(directory)
+            print(f"image: {name}:{version}")
             docker_image = f"{repository}/{name}:{version}"
             yield dockerfile, directory, docker_image
 
