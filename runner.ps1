@@ -3,4 +3,4 @@ param(
 )
 pip3 install --user click requests pathlib
 
-python runner.py --win $action
+python runnerwin.py --win $action

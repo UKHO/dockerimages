@@ -18,13 +18,13 @@ def targets():
     for dockerfile in dockerfiles:
         directory = dirname(dockerfile)
         print(f"getting target: {directory}")
-        versions = ["latest"]
+        versions = ["latest-win"]
 
         print(f"base version: {versions}")
         versions_script_path = join(directory, "versions")
         print(f"path: {versions_script_path}")
         if isfile(versions_script_path):
-            output = run(["bash", versions_script_path])
+            output = run(["cat", versions_script_path])
             versions += output.splitlines()
             print(f"versions: {versions}")
 
