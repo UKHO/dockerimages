@@ -24,8 +24,9 @@ schedules:
 
 variables:
   - name: PoolName
-    value: "UKHO Ubuntu 1804"
+    value: "Mare Nectaris"
   - group: dockerhub
+
 
 jobs:
   - job: 'lint'
