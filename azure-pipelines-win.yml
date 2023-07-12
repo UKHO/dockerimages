@@ -24,7 +24,7 @@ schedules:
 
 variables:
   - name: PoolNameWindows
-    value: "UKHO Windows 2019"
+    value: "Mare Nubium"
   - group: dockerhub
 
 jobs:
