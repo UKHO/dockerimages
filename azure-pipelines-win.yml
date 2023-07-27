@@ -36,7 +36,8 @@ jobs:
 
       - powershell: |
           docker version
-          Get-Service docker
+          Install-Package -Name docker -ProviderName DockerMsftProvider -Force
+          Start-Service docker
         displayName: running
       - powershell: ./runner.ps1 -action "build"
         displayName: build
@@ -48,7 +49,8 @@ jobs:
     steps:
       - powershell: |
           docker version
-          Get-Service docker
+          Install-Package -Name docker -ProviderName DockerMsftProvider -Force
+          Start-Service docker
         displayName: running
       - powershell: docker login -u $(DOCKER_REGISTRY_USERNAME) -p $(DOCKER_REGISTRY_PASSWORD)
         displayName: login
