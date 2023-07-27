@@ -33,14 +33,23 @@ jobs:
     condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/main'))
     pool: $(PoolNameWindows)
     steps:
-      - powershell: ./runner.ps1 -action "build"
 
+      - powershell: docker version
+        display: docker version
+      - powershell: Get-Service docker
+        display: docker running
+      - powershell: ./runner.ps1 -action "build"
+        displayName: build
+      
   - job: publishwindows
     timeoutInMinutes: 600
     pool: $(PoolNameWindows)
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))    
     steps:
       - powershell: docker version
+        display: docker version
+      - powershell: Get-Service docker
+        display: docker running
       - powershell: docker login -u $(DOCKER_REGISTRY_USERNAME) -p $(DOCKER_REGISTRY_PASSWORD)
         displayName: login
       - powershell: ./runner.ps1 -action "build"
