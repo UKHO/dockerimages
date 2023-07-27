@@ -34,9 +34,9 @@ jobs:
     pool: $(PoolNameWindows)
     steps:
 
-      - powershell: docker version
-        displayName: version
-      - powershell: Get-Service docker
+      - powershell: |
+          docker version
+          Get-Service docker
         displayName: running
       - powershell: ./runner.ps1 -action "build"
         displayName: build
@@ -46,9 +46,9 @@ jobs:
     pool: $(PoolNameWindows)
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))    
     steps:
-      - powershell: docker version
-        displayName: version
-      - powershell: Get-Service docker
+      - powershell: |
+          docker version
+          Get-Service docker
         displayName: running
       - powershell: docker login -u $(DOCKER_REGISTRY_USERNAME) -p $(DOCKER_REGISTRY_PASSWORD)
         displayName: login
