@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import base64
 import json
+import os
 from glob import glob
 from os.path import basename, dirname, expanduser, isfile, join
 from pathlib import Path
