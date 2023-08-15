@@ -21,7 +21,7 @@ def targets():
         versions = ["latest-win"]
 
         print(f"base version: {versions}")
-        versions_script_path = join(directory, "versions")
+        versions_script_path = join(os.getcwd(),directory, "versions")
         print(f"path: {versions_script_path}")
         if isfile(versions_script_path):
             print(f"check versions content")
