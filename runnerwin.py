@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import base64
 import json
+import os
 from glob import glob
 from os.path import basename, dirname, expanduser, isfile, join
 from pathlib import Path
@@ -21,13 +22,14 @@ def targets():
         versions = ["latest-win"]
 
         print(f"base version: {versions}")
-        versions_script_path = join(directory, "versions")
+        versions_script_path = join(os.getcwd(),directory, "versions")
         print(f"path: {versions_script_path}")
         if isfile(versions_script_path):
-            output = run(["cat", versions_script_path])
-            versions += output.splitlines()
-            print(f"versions: {versions}")
-
+            print(f"check versions content")
+            with open(versions_script_path, 'r', encoding='UTF-8') as file:
+                versions += file.read().splitlines()
+        
+        print(f"versions: {versions}")
         name = basename(directory)
         print(f"targets: {name}")
 
