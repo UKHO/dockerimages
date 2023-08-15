@@ -26,7 +26,7 @@ def targets():
         print(f"path: {versions_script_path}")
         if isfile(versions_script_path):
             print(f"check versions content")
-            output = run(["cat", versions_script_path])
+            output = open(versions_script_path, mode='r')
             versions += output.splitlines()
             print(f"versions: {versions}")
 
