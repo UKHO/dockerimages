@@ -26,8 +26,9 @@ def targets():
         print(f"path: {versions_script_path}")
         if isfile(versions_script_path):
             print(f"check versions content")
-            output = open(versions_script_path, mode='r')
-            versions += output.splitlines()
+            with open(versions_script_path, 'r', encoding='UTF-8') as file:
+            while output := file.readline():
+                versions += output.rstrip()
             print(f"versions: {versions}")
 
         name = basename(directory)
