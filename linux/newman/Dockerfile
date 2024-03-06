@@ -9,5 +9,5 @@ RUN apt-get update \
     gnupg=* \
     git=* \
     && rm -rf /var/lib/apt/lists/*
-RUN apt-get install nodejs bash -y
+RUN apt-get install -y nodejs bash
 #RUN npm install -g newman
