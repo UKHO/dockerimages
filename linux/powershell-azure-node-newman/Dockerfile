@@ -32,4 +32,3 @@ RUN npm install -g newman
 
 # Add Node.js binary path to the system PATH
 ENV PATH="/root/.nvm/versions/node/$(node -v)/bin/:${PATH}"
-
