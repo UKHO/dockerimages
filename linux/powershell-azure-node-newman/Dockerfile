@@ -28,7 +28,7 @@ ENV NVM_DIR=/root/.nvm
 RUN . "$NVM_DIR/nvm.sh" && nvm install node
 RUN . "$NVM_DIR/nvm.sh" && nvm use node
 RUN . "$NVM_DIR/nvm.sh" && nvm alias default node
-RUN npm install -g newman
+RUN npm install -g newman@5.3.2
 
 # Add Node.js binary path to the system PATH
 ENV PATH="/root/.nvm/versions/node/$(node -v)/bin/:${PATH}"
