@@ -16,7 +16,7 @@ variables:
 steps:
 - script: |
       docker pull owasp/dependency-check:latest
-      docker run owasp/dependency-check:latest --updateonly --nvdApiKey $(NvdApiKey)
+      docker run owasp/dependency-check:latest --updateonly
   displayName: Hydrate NVD database
 - script: |
     #!/bin/bash
