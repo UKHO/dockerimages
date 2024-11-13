@@ -27,8 +27,11 @@ steps:
     docker ps -a
     docker image ls
   displayName: Create Image
-- script: |
-    #!/bin/bash
-    docker login -u $(DOCKER_REGISTRY_USERNAME) -p $(DOCKER_REGISTRY_PASSWORD) 
-    docker push ukhydrographicoffice/dependency-check:latest"
-  displayName: push to docker hub
+- task: Docker@2
+  inputs:
+    containerRegistry: 'ukho-dockerhub'
+    repository: 'ukhydrographicoffice/dependency-check'
+    command: 'push'
+    tags: 'latest'
+    addPipelineData: false
+    addBaseImageData: false
