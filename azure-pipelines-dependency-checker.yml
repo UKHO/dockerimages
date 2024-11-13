@@ -26,6 +26,7 @@ steps:
     docker commit $container_id ukhydrographicoffice/dependency-check:latest
     docker ps -a
     docker image ls
+  displayName: Create Image
 - script: |
     #!/bin/bash
     docker login -u $(DOCKER_REGISTRY_USERNAME) -p $(DOCKER_REGISTRY_PASSWORD) 
