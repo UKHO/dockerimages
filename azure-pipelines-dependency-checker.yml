@@ -1,0 +1,33 @@
+trigger: none
+pr: none
+
+schedules:
+  - cron: 0 23 * * *
+    always: true
+    branches:
+     include:
+       - main
+    displayName: scheduled database update
+
+pool: Mare Nectaris
+variables:
+- group: NvdApiKey
+- group: dockerhub
+steps:
+- script: |
+      docker pull owasp/dependency-check:latest
+      docker run owasp/dependency-check:latest --updateonly --nvdApiKey $(NvdApiKey)
+  displayName: Hydrate NVD database
+- script: |
+    #!/bin/bash
+    # Get the container ID of the most recent running container
+    container_id=$(docker ps -qa)
+    echo "Container ID: $container_id"
+    docker commit $container_id ukhydrographicoffice/dependency-check:latest
+    docker ps -a
+    docker image ls
+- script: |
+    #!/bin/bash
+    docker login -u $(DOCKER_REGISTRY_USERNAME) -p $(DOCKER_REGISTRY_PASSWORD) 
+    docker push ukhydrographicoffice/dependency-check:latest"
+  displayName: push to docker hub
