@@ -16,7 +16,27 @@ variables:
 steps:
 - script: |
       docker pull owasp/dependency-check:latest
-      docker run owasp/dependency-check:latest --updateonly
+      DC_VERSION="latest"
+      DC_DIRECTORY=$HOME/OWASP-Dependency-Check
+      DC_PROJECT="dependency-check scan: $(pwd)"
+      DATA_DIRECTORY="$DC_DIRECTORY/data"
+      CACHE_DIRECTORY="$DC_DIRECTORY/data/cache"
+
+      if [ ! -d "$DATA_DIRECTORY" ]; then
+          echo "Initially creating persistent directory: $DATA_DIRECTORY"
+          mkdir -p "$DATA_DIRECTORY"
+      fi
+      if [ ! -d "$CACHE_DIRECTORY" ]; then
+          echo "Initially creating persistent directory: $CACHE_DIRECTORY"
+          mkdir -p "$CACHE_DIRECTORY"
+      fi
+      
+      docker run -e user=$USER \
+        -u $(id -u ${USER}):$(id -g ${USER}) \
+        --volume "$DATA_DIRECTORY":/usr/share/dependency-check/data:z \
+        --volume $(pwd)/odc-reports:/reports:z \
+        owasp/dependency-check:$DC_VERSION \
+        owasp/dependency-check:latest --updateonly
   displayName: Hydrate NVD database
 - script: |
     #!/bin/bash
