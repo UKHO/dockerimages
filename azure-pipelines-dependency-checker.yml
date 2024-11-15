@@ -15,6 +15,7 @@ variables:
 - group: dockerhub
 steps:
 - script: |
-    docker build .
+    docker build --tag ukhydrographicoffice/dependency-check .
+    docker run -rm ukhydrographicoffice/dependency-check --updateonly
   displayName: Build nvd data
   workingDirectory: $(Build.SourcesDirectory)/dependency-check
