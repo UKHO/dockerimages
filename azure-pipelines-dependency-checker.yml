@@ -15,28 +15,15 @@ variables:
 - group: dockerhub
 steps:
 - script: |
-      docker pull owasp/dependency-check:latest
-      DC_VERSION="latest"
-      
-      docker run -e user=$USER \
-        -u $(id -u ${USER}):$(id -g ${USER}) \
-        owasp/dependency-check:$DC_VERSION \
-        owasp/dependency-check:latest --updateonly
-  displayName: Hydrate NVD database
-- script: |
-    #!/bin/bash
-    # Get the container ID of the most recent running container
-    container_id=$(docker ps -qa)
-    echo "Container ID: $container_id"
-    docker commit $container_id ukhydrographicoffice/dependency-check:latest
-    docker ps -a
-    docker image ls
-  displayName: Create Image
+    export DOCKER_BUILDKIT=1
+    echo "$(NvdApiKey)" > nvdapikey.txt 
+    docker build --secret id=nvdapikey,src=nvdapikey.txt --tag ukhydrographicoffice/dependency-check .
+    docker run --rm ukhydrographicoffice/dependency-check --version
+  displayName: Build nvd data
+  workingDirectory: $(Build.SourcesDirectory)/dependency-check
 - task: Docker@2
   inputs:
     containerRegistry: 'ukho-dockerhub'
     repository: 'ukhydrographicoffice/dependency-check'
     command: 'push'
     tags: 'latest'
-    addPipelineData: false
-    addBaseImageData: false
