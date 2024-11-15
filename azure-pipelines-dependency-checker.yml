@@ -19,8 +19,6 @@ steps:
     echo "$(NvdApiKey)" > nvdapikey.txt 
     docker build --secret id=nvdapikey,src=nvdapikey.txt --tag ukhydrographicoffice/dependency-check .
     docker run --rm ukhydrographicoffice/dependency-check --version
-    docker run --rm ukhydrographicoffice/dependency-check --updateonly
-    
   displayName: Build nvd data
   workingDirectory: $(Build.SourcesDirectory)/dependency-check
 - task: Docker@2
