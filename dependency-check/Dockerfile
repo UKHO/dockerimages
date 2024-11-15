@@ -8,4 +8,4 @@ RUN --mount=type=secret,id=nvdapikey \
 
 # Run the dependency-check script with the secret
 RUN --mount=type=secret,id=nvdapikey \
-    /usr/share/dependency-check/bin/dependency-check.sh --updateonly --nvdapikey "$(cat /run/secrets/nvdapikey)"
+    /usr/share/dependency-check/bin/dependency-check.sh --updateonly --nvdApiKey "$(cat /run/secrets/nvdapikey)"
