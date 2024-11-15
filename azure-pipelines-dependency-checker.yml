@@ -23,3 +23,9 @@ steps:
     
   displayName: Build nvd data
   workingDirectory: $(Build.SourcesDirectory)/dependency-check
+- task: Docker@2
+  inputs:
+    containerRegistry: 'ukho-dockerhub'
+    repository: 'ukhydrographicoffice/dependency-check'
+    command: 'push'
+    tags: 'latest'
