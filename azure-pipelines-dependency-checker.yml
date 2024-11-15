@@ -15,7 +15,8 @@ variables:
 - group: dockerhub
 steps:
 - script: |
-    docker build --tag ukhydrographicoffice/dependency-check .
+    export DOCKER_BUILDKIT=1
+    echo "$(NvdApiKey)" | docker build --secret id=nvdapikey --tag ukhydrographicoffice/dependency-check .
     docker run --rm ukhydrographicoffice/dependency-check --version
     docker run --rm ukhydrographicoffice/dependency-check --updateonly
     
