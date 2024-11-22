@@ -1,5 +1,4 @@
 FROM owasp/dependency-check:latest
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 USER root
 RUN mkdir /usr/share/dependency-check/data/cache
 # Debug: Check permissions of the secret
