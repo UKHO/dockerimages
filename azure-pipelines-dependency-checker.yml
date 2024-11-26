@@ -5,8 +5,8 @@ schedules:
   - cron: 0 23 * * *
     always: true
     branches:
-     include:
-       - main
+      include:
+        - main
     displayName: scheduled database update
 
 pool: Mare Nectaris
@@ -21,9 +21,11 @@ steps:
     docker run --rm ukhydrographicoffice/dependency-check --version
   displayName: Build nvd data
   workingDirectory: $(Build.SourcesDirectory)/dependency-check
+- script: echo "##vso[task.setvariable variable=BuildDate]$(date +%Y-%m-%d)"
+  displayName: Set build date
 - task: Docker@2
   inputs:
     containerRegistry: 'ukho-dockerhub'
     repository: 'ukhydrographicoffice/dependency-check'
     command: 'push'
-    tags: 'latest'
+    tags: 'latest,$(BuildDate)'
