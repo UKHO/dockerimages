@@ -9,9 +9,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     python3.12=* \
     unzip=* \
     wget=* \
-    python3.12-dev=* \
+    python3.13-dev=* \
     build-essential=* \
-  && ln -f -s /usr/bin/python3.12 /usr/bin/python3 \
+  && ln -f -s /usr/bin/python3.13 /usr/bin/python3 \
   && rm -rf /var/lib/apt/lists/* \
   && pip3 install --no-cache-dir setuptools==41.6.0 wheel==0.33.6 \
   && pip3 install --no-cache-dir awscli==1.16.277 \
