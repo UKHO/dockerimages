@@ -33,3 +33,5 @@ RUN echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $(lsb
 RUN apt-get update \
     && apt-get install -y --no-install-recommends azure-cli=* \
     && rm -rf /var/lib/apt/lists/*
+    RUN curl -sL https://aka.ms/downloadazcopy-v10-linux | tar -xz -C /usr/local/bin --strip-components=1 \
+    && chmod +x /usr/local/bin/azcopy

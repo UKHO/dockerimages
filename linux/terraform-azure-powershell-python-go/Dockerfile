@@ -1,4 +1,4 @@
-FROM ukhydrographicoffice/terraform-azure-powershell:0.14.5
+FROM ukhydrographicoffice/terraform-azure-powershell:latest
 
 RUN apt-get update -q -y && apt-get install -q -y --no-install-recommends \
                                                     python3-pip=18.1-5 \
