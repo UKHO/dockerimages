@@ -40,7 +40,7 @@ RUN sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft
     && apt-get install -y --no-install-recommends powershell=* \    
     && rm -rf /var/lib/apt/lists/*
 
-FROM node:current
+FROM node:23.10.0-bookworm-slim
 # Set the shell for subsequent commands
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Update package index and install necessary dependencies
