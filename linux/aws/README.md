@@ -6,8 +6,8 @@ Python and various dependencies
 
 |Technology/Library|Version |
 |------------------|--------|
-|Python            |3.6     |
-|awscli            |1.16.291|
+|Python            |3.12    |
+|awscli            |1.38.26 |
 
 ## How to use
 
