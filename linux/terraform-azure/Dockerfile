@@ -1,4 +1,4 @@
-FROM debian:buster as terraform
+FROM debian:bookworm as terraform
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
@@ -13,7 +13,7 @@ RUN chmod a+x ./versions && \
     curl -O "https://releases.hashicorp.com/terraform/${version}/terraform_${version}_linux_amd64.zip" -sk && \
     unzip -j "terraform_${version}_linux_amd64.zip"
 
-FROM debian:buster-slim
+FROM debian:bookworm-slim
 COPY --from=terraform /terraform /usr/local/bin/terraform
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN apt-get update \
