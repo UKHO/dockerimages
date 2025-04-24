@@ -1,0 +1,1 @@
+A container based on terraform-azure-powershell which also sets up the latest version of Go
