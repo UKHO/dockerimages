@@ -29,26 +29,19 @@ variables:
 
 
 jobs:
-  - job: 'build_and_test'
+  - job: 'lint'
+    pool: $(PoolName)
+    steps:
+      - script: ./runner lint
+
+  - job: 'build'
     timeoutInMinutes: 600
     condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/main'))
     dependsOn: lint
     pool: $(PoolName)
     steps:
-      - script: docker buildx bake --call build linux --progress=plain
-      - script: | 
-          image_array=$(docker images --format "\"{{.Repository}}:{{.Tag}}\"" | jq -s)
-          echo "##vso[task.setvariable variable=IMAGE_ARRAY]$image_array"
-      - ${{ each image in fromJson(variables['IMAGE_ARRAY']) }}
-      - task: UkhoSnykScanTask@0
-        inputs:
-          failOnIssues: false # Fails if any issues are found
-          organization: $(SNYK_ORG)
-          serviceConnectionEndpoint: $(SNYK_AUTH)
-          testType: container
-          monitorWhen: never # Do not monitor this scan in the UI
-          severityThreshold: low
-          dockerImageName: $(image)
+      - script: ./runner --linux build
+
 
   - job: 'publish'
     timeoutInMinutes: 600
@@ -58,4 +51,4 @@ jobs:
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
     steps:
       - script: docker login -u $(DOCKER_REGISTRY_USERNAME) -p $(DOCKER_REGISTRY_PASSWORD)     
-      - script: docker buildx bake --call build linux --progress=plain --push
+      - script: ./runner --linux build publish
