@@ -63,13 +63,6 @@ target "dotnetcore80-zip" {
     no-cache = true
 }
 
-target "esa-snap7-snappy" {
-    context = "./linux/esa-snap7-snappy"
-    dockerfile = "Dockerfile"
-    tags = ["ukhydrographicoffice/esa-snap7-snappy:latest"]
-    no-cache = true
-}
-
 target "jdk8-python38" {
     context = "./linux/jdk8-python38"
     dockerfile = "Dockerfile"
