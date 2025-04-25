@@ -33,15 +33,12 @@ jobs:
     condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/main'))
     pool: $(PoolNameWindows)
     steps:
+
       - powershell: |
           Get-Service docker
           docker version
         displayName: running
-      - powershell: |
-          docker plugin install docker/buildx:latest
-          docker buildx install
-        displayName: install buildx
-      - powershell: docker buildx bake --call build windows --progress=plain
+      - powershell: ./runner.ps1 -action "build"
         displayName: build
       
   - job: publishwindows
