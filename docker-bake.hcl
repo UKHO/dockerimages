@@ -1,5 +1,5 @@
 group "all" {
-    targets = ["dependency-check", "terraform-win", "azure", "azure-devops", "dotnetcore80-zip", "esa-snap7-snappy", "jdk8-python38", "powershell-azure-node", "powershell-azure-node-newman", "terraform", "terraform-azure", "terraform-azure-make", "terraform-azure-powershell", "terraform-azure-powershell-go", "terraform-azure-powershell-python-go", "terraform-azure-powershell-unzip", "terraform-powershell"]
+    targets = ["dependency-check", "terraform-win", "azure", "azure-devops", "dotnetcore80-zip", "jdk8-python38", "powershell-azure-node", "powershell-azure-node-newman", "terraform", "terraform-azure", "terraform-azure-make", "terraform-azure-powershell", "terraform-azure-powershell-go", "terraform-azure-powershell-python-go", "terraform-azure-powershell-unzip", "terraform-powershell"]
 }
 
 group "dependency-check" {
@@ -14,7 +14,6 @@ group "linux" {
     targets = ["azure", 
     "azure-devops", 
     "dotnetcore80-zip", 
-    "esa-snap7-snappy", 
     "jdk8-python38", 
     "powershell-azure-node", 
     "powershell-azure-node-newman", 
