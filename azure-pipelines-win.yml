@@ -38,7 +38,7 @@ jobs:
           Get-Service docker
           docker version
         displayName: running
-      - powershell: ./runner.ps1 -action "build"
+      - powershell: docker buildx bake --call build windows --progress=plain
         displayName: build
       
   - job: publishwindows
