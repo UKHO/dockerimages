@@ -33,11 +33,13 @@ jobs:
     condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/main'))
     pool: $(PoolNameWindows)
     steps:
-
       - powershell: |
           Get-Service docker
           docker version
         displayName: running
+      - powershell: |
+          Invoke-Webrequest -Uri https://github.com/docker/buildx/releases/download/v0.23.0/buildx-v0.23.0.windows-arm64.exe -OutFile "C:\Program Files\Docker\cli-plugins\docker-buildx.exe"
+        displayName: install buildx
       - powershell: docker buildx bake --call build windows --progress=plain
         displayName: build
       
