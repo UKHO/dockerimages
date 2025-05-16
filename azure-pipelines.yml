@@ -40,7 +40,7 @@ jobs:
     dependsOn: lint
     pool: $(PoolName)
     steps:
-      - script: ./runner --linux build
+      - script: docker buildx bake --call build linux --progress=plain 
 
 
   - job: 'publish'

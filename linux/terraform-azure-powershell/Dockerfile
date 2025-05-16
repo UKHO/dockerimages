@@ -1,4 +1,4 @@
-FROM debian:bookworm as terraform
+FROM debian:bookworm AS terraform
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
