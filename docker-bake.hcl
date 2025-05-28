@@ -1,5 +1,5 @@
 group "all" {
-    targets = ["dependency-check", "terraform-win", "azure", "azure-devops", "dotnetcore80-zip", "jdk8-python38", "powershell-azure-node", "powershell-azure-node-newman", "terraform", "terraform-azure", "terraform-azure-make", "terraform-azure-powershell", "terraform-azure-powershell-go", "terraform-azure-powershell-python-go", "terraform-azure-powershell-unzip", "terraform-powershell"]
+    targets = ["dependency-check", "terraform-win", "oset-build-deploy-tools-win", "azure", "azure-devops", "dotnetcore80-zip", "jdk8-python38", "powershell-azure-node", "powershell-azure-node-newman", "terraform", "terraform-azure", "terraform-azure-make", "terraform-azure-powershell", "terraform-azure-powershell-go", "terraform-azure-powershell-python-go", "terraform-azure-powershell-unzip", "terraform-powershell"]
 }
 
 group "dependency-check" {
@@ -7,7 +7,8 @@ group "dependency-check" {
 }
 
 group "windows" {
-    targets = ["terraform-win"]
+    targets = ["terraform-win",
+    "oset-build-deploy-tools-win"]
 }
 
 group "linux" {
@@ -38,6 +39,13 @@ target "terraform-win" {
     context = "./win/terraform"
     dockerfile = "Dockerfile"
     tags = ["ukhydrographicoffice/terraform:latest-win"]
+    no-cache = true
+}
+
+target "oset-build-deploy-tools-win" {
+    context = "./win/ukho-oset-build-deploy-tools"
+    dockerfile = "Dockerfile"
+    tags = ["ukhydrographicsoffice/ukho-oset-build-deploy-tools:latest-win]
     no-cache = true
 }
 
