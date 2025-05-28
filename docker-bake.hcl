@@ -43,9 +43,9 @@ target "terraform-win" {
 }
 
 target "oset-build-deploy-tools-win" {
-    context = "./win/ukho-oset-build-deploy-tools"
+    context = "./win/oset-build-deploy-tools"
     dockerfile = "Dockerfile"
-    tags = ["ukhydrographicsoffice/ukho-oset-build-deploy-tools:latest-win]
+    tags = ["ukhydrographicsoffice/oset-build-deploy-tools:latest-win]
     no-cache = true
 }
 
