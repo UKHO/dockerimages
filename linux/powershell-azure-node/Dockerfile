@@ -1,6 +1,7 @@
 FROM debian:bookworm AS terraform
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN apt-get update \
+    && apt-get upgrade -y \
     && apt-get install -y --no-install-recommends \
     ca-certificates=* \
     curl=* \
@@ -17,6 +18,7 @@ FROM debian:bookworm-slim
 COPY --from=terraform /terraform /usr/local/bin/terraform
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN apt-get update \
+    && apt-get upgrade -y \
     && apt-get install -y --no-install-recommends \
     ca-certificates=* \
     curl=* \
@@ -40,11 +42,12 @@ RUN sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft
     && apt-get install -y --no-install-recommends powershell=* \    
     && rm -rf /var/lib/apt/lists/*
 
-FROM node:23.10.0-bookworm-slim
+FROM node:23.11.1-bookworm-slim
 # Set the shell for subsequent commands
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Update package index and install necessary dependencies
 RUN apt-get update \
+    && apt-get upgrade -y \
     && apt-get install -y --no-install-recommends \
         ca-certificates \
         curl \
