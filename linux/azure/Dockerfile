@@ -1,13 +1,13 @@
-FROM debian:bookworm-slim
+FROM ubuntu:24.04
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-    ca-certificates=* \
-    curl=* \
-    apt-transport-https=* \
-    lsb-release=* \
-    gnupg=* \
-    git=* \
+    ca-certificates \
+    curl \
+    apt-transport-https \
+    lsb-release \
+    gnupg \
+    git \
     && rm -rf /var/lib/apt/lists/*
 RUN curl -sL https://packages.microsoft.com/keys/microsoft.asc | \
     gpg --dearmor | \
