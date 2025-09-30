@@ -4,7 +4,7 @@ repos:
   hooks:
     - id: hadolint
       args: []
-      files: ^Dockerfile$
+      files: ^.{1,}/.{1,}/Dockerfile$
       additional_dependencies: []
       stages: [pre-commit]
 - repo: https://github.com/trufflesecurity/trufflehog
@@ -12,6 +12,6 @@ repos:
   hooks:
     - id: trufflehog
       args: ['--entropy=False', '--json']
-      files: ^Dockerfile$
+      files: ^.{1,}/.{1,}/Dockerfile$
       additional_dependencies: []
       stages: [pre-commit]
