@@ -2,7 +2,7 @@ repos:
 - repo: https://github.com/hadolint/hadolint
   rev: v2.14.0
   hooks:
-    - id: hadolint
+    - id: hadolint-docker
       args: []
       files: ^.{1,}/.{1,}/Dockerfile$
       additional_dependencies: []
@@ -11,7 +11,6 @@ repos:
   rev: v3.90.8
   hooks:
     - id: trufflehog
-      args: ['--entropy=False', '--json']
       files: ^.{1,}/.{1,}/Dockerfile$
       additional_dependencies: []
       stages: [pre-commit]
