@@ -20,7 +20,7 @@ group "linux" {
     "powershell-azure-node-newman", 
     "terraform", 
     "terraform-azure", 
-    // "terraform-azure-make", 
+    "terraform-azure-make", 
     // "terraform-azure-powershell", 
     // "terraform-azure-powershell-go", 
     // "terraform-azure-powershell-python-go", 
