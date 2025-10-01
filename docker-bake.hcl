@@ -18,7 +18,7 @@ group "linux" {
     "jdk8-python38", 
     "powershell-azure-node", 
     "powershell-azure-node-newman", 
-    // "terraform", 
+    "terraform", 
     // "terraform-azure", 
     // "terraform-azure-make", 
     // "terraform-azure-powershell", 
