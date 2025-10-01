@@ -24,7 +24,7 @@ group "linux" {
     "terraform-azure-powershell", 
     "terraform-azure-powershell-go", 
     "terraform-azure-powershell-python-go", 
-    // "terraform-azure-powershell-unzip", 
+    "terraform-azure-powershell-unzip", 
     // "terraform-powershell"
     ]
 }
