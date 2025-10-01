@@ -13,7 +13,7 @@ group "windows" {
 group "linux" {
     targets = [
     "azure", 
-    // "azure-devops", 
+    "azure-devops", 
     // "dotnetcore80-zip", 
     // "jdk8-python38", 
     // "powershell-azure-node", 
