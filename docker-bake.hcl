@@ -12,19 +12,19 @@ group "windows" {
 
 group "linux" {
     targets = [
-    // "azure", 
-    // "azure-devops", 
-    // "dotnetcore80-zip", 
-    // "jdk8-python38", 
-    // "powershell-azure-node", 
-    // "powershell-azure-node-newman", 
-    // "terraform", 
-    // "terraform-azure", 
-    // "terraform-azure-make", 
-    // "terraform-azure-powershell", 
-    // "terraform-azure-powershell-go", 
-    // "terraform-azure-powershell-python-go", 
-    // "terraform-azure-powershell-unzip", 
+    "azure", 
+    "azure-devops", 
+    "dotnetcore80-zip", 
+    "jdk8-python38", 
+    "powershell-azure-node", 
+    "powershell-azure-node-newman", 
+    "terraform", 
+    "terraform-azure", 
+    "terraform-azure-make", 
+    "terraform-azure-powershell", 
+    "terraform-azure-powershell-go", 
+    "terraform-azure-powershell-python-go", 
+    "terraform-azure-powershell-unzip", 
     "terraform-powershell"
     ]
 }
