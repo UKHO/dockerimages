@@ -15,7 +15,7 @@ group "linux" {
     "azure", 
     "azure-devops", 
     "dotnetcore80-zip", 
-    // "jdk8-python38", 
+    "jdk8-python38", 
     // "powershell-azure-node", 
     // "powershell-azure-node-newman", 
     // "terraform", 
