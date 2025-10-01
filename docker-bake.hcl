@@ -23,7 +23,7 @@ group "linux" {
     "terraform-azure-make", 
     "terraform-azure-powershell", 
     "terraform-azure-powershell-go", 
-    // "terraform-azure-powershell-python-go", 
+    "terraform-azure-powershell-python-go", 
     // "terraform-azure-powershell-unzip", 
     // "terraform-powershell"
     ]
