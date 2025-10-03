@@ -45,14 +45,14 @@ target "terraform-win" {
     no-cache = true
 }
 
-target "azure" {
+target "aws" {
     context = "./linux/aws"
     dockerfile = "Dockerfile"
     tags = ["ukhydrographicoffice/aws:latest"]
     no-cache = true
 }
 
-target "azure" {
+target "awscli" {
     context = "./linux/awscli"
     dockerfile = "Dockerfile"
     tags = ["ukhydrographicoffice/awscli:latest"]
