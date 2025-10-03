@@ -12,6 +12,8 @@ group "windows" {
 
 group "linux" {
     targets = [
+    "aws",
+    "awscli",
     "azure", 
     "azure-devops", 
     "dotnetcore80-zip", 
@@ -40,6 +42,20 @@ target "terraform-win" {
     context = "./win/terraform"
     dockerfile = "Dockerfile"
     tags = ["ukhydrographicoffice/terraform:latest-win"]
+    no-cache = true
+}
+
+target "azure" {
+    context = "./linux/aws"
+    dockerfile = "Dockerfile"
+    tags = ["ukhydrographicoffice/aws:latest"]
+    no-cache = true
+}
+
+target "azure" {
+    context = "./linux/awscli"
+    dockerfile = "Dockerfile"
+    tags = ["ukhydrographicoffice/awscli:latest"]
     no-cache = true
 }
 
