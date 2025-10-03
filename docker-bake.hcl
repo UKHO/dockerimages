@@ -31,6 +31,39 @@ group "linux" {
     ]
 }
 
+group "aws" {
+    targets = ["aws", "awscli"]
+}
+
+group "azure" {
+    targets = ["azure", "azure-devops"]
+}
+
+group "dotnet" {
+    targets = ["dotnetcore80-zip"]
+}
+
+group "java" {
+    targets = ["jdk8-python38"]
+}
+
+group "powershell" {
+    targets = ["powershell-azure-node", "powershell-azure-node-newman"]
+}
+
+group "terraform" {
+    targets = [
+    "terraform", 
+    "terraform-azure", 
+    "terraform-azure-make", 
+    "terraform-azure-powershell", 
+    "terraform-azure-powershell-go", 
+    "terraform-azure-powershell-python-go", 
+    "terraform-azure-powershell-unzip", 
+    "terraform-powershell"
+    ]
+}
+
 target "dependency-check" {
     context = "./dependency-check"
     dockerfile = "Dockerfile"

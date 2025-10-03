@@ -40,7 +40,18 @@ jobs:
     dependsOn: lint
     pool: $(PoolName)
     steps:
-      - script: docker buildx bake --call build linux --debug
+      - script: docker buildx bake --call build aws --debug
+        displayName: 'Build AWS Images'
+      - script: docker buildx bake --call build azure --debug
+        displayName: 'Build Azure Images'
+      - script: docker buildx bake --call build dotnet --debug
+        displayName: 'Build .NET Images'
+      - script: docker buildx bake --call build java --debug
+        displayName: 'Build Java Images'
+      - script: docker buildx bake --call build powershell --debug
+        displayName: 'Build PowerShell Images'
+      - script: docker buildx bake --call build terraform --debug
+        displayName: 'Build Terraform Images'
 
 
   - job: 'publish'
