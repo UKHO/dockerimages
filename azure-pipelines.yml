@@ -40,7 +40,9 @@ jobs:
     dependsOn: lint
     pool: $(PoolName)
     steps:
-      - script: docker buildx bake --call build linux --progress=plain 
+      - script: |
+          docker login dhi.io -u $(DOCKER_REGISTRY_USERNAME) -p $(DOCKER_REGISTRY_PASSWORD)  
+          docker buildx bake --call build linux --progress=plain 
 
 
   - job: 'publish'
@@ -50,5 +52,7 @@ jobs:
       - 'lint'
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
     steps:
-      - script: docker login -u $(DOCKER_REGISTRY_USERNAME) -p $(DOCKER_REGISTRY_PASSWORD)     
+      - script: |
+          docker login -u $(DOCKER_REGISTRY_USERNAME) -p $(DOCKER_REGISTRY_PASSWORD)
+          docker login dhi.io -u $(DOCKER_REGISTRY_USERNAME) -p $(DOCKER_REGISTRY_PASSWORD)      
       - script: ./runner --linux build publish
