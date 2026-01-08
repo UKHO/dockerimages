@@ -1,5 +1,5 @@
 group "all" {
-    targets = ["dependency-check", "terraform-win", "azure", "azure-devops", "dotnetcore80-zip", "jdk8-python38", "powershell-azure-node", "powershell-azure-node-newman", "terraform", "terraform-azure", "terraform-azure-make", "terraform-azure-powershell", "terraform-azure-powershell-go", "terraform-azure-powershell-python-go", "terraform-azure-powershell-unzip", "terraform-powershell"]
+    targets = ["dependency-check", "terraform-win", "azure", "azure-devops", "dotnetcore80-zip", "jdk8-python38", "powershell-azure-node-newman", "terraform", "terraform-azure", "terraform-azure-make", "terraform-azure-powershell", "terraform-azure-powershell-go", "terraform-azure-powershell-python-go", "terraform-azure-powershell-unzip", "terraform-powershell"]
 }
 
 group "dependency-check" {
@@ -17,8 +17,7 @@ group "linux" {
     "azure", 
     "azure-devops", 
     "dotnetcore80-zip", 
-    "jdk8-python38", 
-    "powershell-azure-node", 
+    "jdk8-python38",  
     "powershell-azure-node-newman", 
     "terraform", 
     "terraform-azure", 
@@ -76,12 +75,6 @@ target "jdk8-python38" {
     context = "./linux/jdk8-python38"
     dockerfile = "Dockerfile"
     tags = ["ukhydrographicoffice/jdk8-python38:latest"]
-}
-
-target "powershell-azure-node" {
-    context = "./linux/powershell-azure-node"
-    dockerfile = "Dockerfile"
-    tags = ["ukhydrographicoffice/powershell-azure-node:latest"]
 }
 
 target "powershell-azure-node-newman" {
