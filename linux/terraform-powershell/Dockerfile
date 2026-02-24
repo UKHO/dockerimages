@@ -32,15 +32,15 @@ RUN wget http://deb.debian.org/debian/pool/main/i/icu/libicu72_72.1-3+deb12u1_am
     && dpkg -i /tmp/libicu72.deb \
     && rm /tmp/libicu72.deb
 
-RUN curl -sL https://packages.microsoft.com/keys/microsoft.asc | \
-    gpg --dearmor | \
-    tee /etc/apt/trusted.gpg.d/microsoft.asc.gpg > /dev/null
+RUN mkdir -p /etc/apt/keyrings \
+    && curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor --batch --yes -o /etc/apt/keyrings/microsoft.gpg \
+    && chmod go+r /etc/apt/keyrings/microsoft.gpg
 
 # Create /etc/shells if it doesn't exist and clean up any stale locks
 RUN touch /etc/shells \
     && rm -f /etc/shells.tmp /var/lib/dpkg/lock-frontend /var/lib/dpkg/lock
 
-RUN sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-debian-buster-prod/ buster main" > /etc/apt/sources.list.d/microsoft.list' \
+RUN sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/microsoft.gpg] https://packages.microsoft.com/debian/12/prod bookworm main" > /etc/apt/sources.list.d/microsoft-prod.list' \
     && apt-get update \
     && apt-get install -y --no-install-recommends powershell=* \    
     && rm -rf /var/lib/apt/lists/*
