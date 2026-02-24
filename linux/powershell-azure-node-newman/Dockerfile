@@ -1,10 +1,11 @@
-FROM dhi.io/debian-base:trixie
+FROM dhi.io/debian-base:trixie-dev
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
     curl=* \
     gzip=* \
     wget=* \
+    gpg=* \
     libatomic1=* \
     && rm -rf /var/lib/apt/lists/*
 
@@ -15,9 +16,11 @@ RUN wget http://deb.debian.org/debian/pool/main/i/icu/libicu72_72.1-3+deb12u1_am
 
 RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
 
-# Install AzCopy through the official Microsoft package repository.
-RUN curl -sSL -O https://packages.microsoft.com/config/debian/12/packages-microsoft-prod.deb
-RUN dpkg -i packages-microsoft-prod.deb
+# Install AzCopy and PowerShell through the official Microsoft package repository.
+RUN mkdir -p /etc/apt/keyrings \
+    && curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor --batch --yes -o /etc/apt/keyrings/microsoft.gpg \
+    && chmod go+r /etc/apt/keyrings/microsoft.gpg \
+    && echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/microsoft.gpg] https://packages.microsoft.com/debian/12/prod bookworm main" > /etc/apt/sources.list.d/microsoft-prod.list
 
 # Create /etc/shells if it doesn't exist and clean up any stale locks
 RUN touch /etc/shells \
