@@ -20,7 +20,8 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends \
     curl=* \
     wget=* \
-    gpg=*
+    gpg=* \
+    git=*
 
 # Download and install libicu72 from Debian 12 repository (compatible with PowerShell)
 RUN wget http://deb.debian.org/debian/pool/main/i/icu/libicu72_72.1-3+deb12u1_amd64.deb -O /tmp/libicu72.deb \

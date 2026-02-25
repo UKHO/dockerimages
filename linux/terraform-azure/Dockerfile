@@ -18,7 +18,8 @@ COPY --from=terraform /terraform /usr/local/bin/terraform
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-    curl=*
+    curl=* \
+    git=*
 RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
 RUN curl -sL https://aka.ms/downloadazcopy-v10-linux | tar -xz -C /usr/local/bin --strip-components=1 \
     && chmod +x /usr/local/bin/azcopy
