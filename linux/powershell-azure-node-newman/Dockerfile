@@ -7,7 +7,6 @@ RUN apt-get update \
     wget=* \
     gpg=* \
     libatomic1=* \
-    passwd=* \
     && rm -rf /var/lib/apt/lists/*
 
 # Download and install libicu72 from Debian 12 repository (compatible with PowerShell)
@@ -40,3 +39,12 @@ RUN . "$NVM_DIR/nvm.sh" && npm install -g newman@6.2.1
 
 # Add Node.js binary path to the system PATH
 ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
+
+# Create AzDevOps_azpcontainer user and add to sudoers as crashes when run in pipeline
+RUN useradd -m -u 1001 AzDevOps_azpcontainer && \
+    groupadd azure_pipelines_sudo && \
+    usermod -a -G azure_pipelines_sudo AzDevOps_azpcontainer && \
+    echo '%azure_pipelines_sudo ALL=(ALL:ALL) NOPASSWD:ALL' >> /etc/sudoers && \
+    ln -sf /usr/bin/true /usr/bin/su  && \
+    ln -sf /usr/bin/true /usr/sbin/groupadd  && \
+    ln -sf /usr/bin/true /usr/sbin/usermod
