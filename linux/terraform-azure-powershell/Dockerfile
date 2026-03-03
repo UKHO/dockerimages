@@ -21,7 +21,8 @@ RUN apt-get update \
     curl=* \
     wget=* \
     gpg=* \
-    git=*
+    git=* \
+    passwd=*
 
 # Download and install libicu72 from Debian 12 repository (compatible with PowerShell)
 RUN wget http://deb.debian.org/debian/pool/main/i/icu/libicu72_72.1-3+deb12u1_amd64.deb -O /tmp/libicu72.deb \
@@ -43,13 +44,4 @@ RUN mkdir -p /etc/apt/keyrings \
     && apt-get update \
     && apt-get install -y --no-install-recommends powershell=* \    
     && rm -rf /var/lib/apt/lists/*
-
-# Create AzDevOps_azpcontainer user and add to sudoers as crashes when run in pipeline
-RUN useradd -m -u 1001 AzDevOps_azpcontainer && \
-    groupadd azure_pipelines_sudo && \
-    usermod -a -G azure_pipelines_sudo AzDevOps_azpcontainer && \
-    echo '%azure_pipelines_sudo ALL=(ALL:ALL) NOPASSWD:ALL' >> /etc/sudoers && \
-    ln -sf /usr/bin/true /usr/bin/su  && \
-    ln -sf /usr/bin/true /usr/sbin/groupadd  && \
-    ln -sf /usr/bin/true /usr/sbin/usermod
 

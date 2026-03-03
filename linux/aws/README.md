@@ -1,13 +1,14 @@
 # aws
 
-This image provides a container with no entrypoint (for an entrypoint see awscli)
+## Purpose
+General-purpose AWS tooling container with no fixed entrypoint, so custom commands/scripts can be run directly.
 
-Python and various dependencies
-
-|Technology/Library|Version |
-|------------------|--------|
-|Python            |3.12    |
-|awscli            |1.38.26 |
+## Installed dependencies
+| Dependency | Version | Notes |
+|---|---|---|
+| Python | 3.12 | From base image `python:3.12-alpine` |
+| AWS CLI | 1.38.26 | Installed via `pip3` |
+| groff | distro package | Installed via `apk` |
 
 ## How to use
 
