@@ -1,7 +1,7 @@
 FROM ukhydrographicoffice/terraform-azure-powershell:latest
 
 # Install dependencies
-RUN apt-get update && apt-get install -y --reinstall passwd && apt-get install -y curl git ca-certificates jq
+RUN apt-get update && apt-get install -y curl git ca-certificates jq
 
 # Get latest version dynamically and install Go
 RUN GO_URL="https://go.dev/dl/?mode=json" && \
