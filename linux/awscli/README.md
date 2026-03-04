@@ -1,11 +1,14 @@
 # awscli
-This image provides an encapsulated environment to execute `awscli` commands without the need to install 
-Python and various dependencies
 
-|Technology/Library|Version |
-|------------------|--------|
-|Python            |3.12    |
-|awscli            |1.38.26 |
+## Purpose
+Encapsulated AWS CLI container with `aws` as the entrypoint for direct command execution.
+
+## Installed dependencies
+| Dependency | Version | Notes |
+|---|---|---|
+| Python | 3.12 | From base image `python:3.12-alpine` |
+| AWS CLI | 1.38.26 | Installed via `pip3` |
+| groff | distro package | Installed via `apk` |
 
 ## How to use
 
