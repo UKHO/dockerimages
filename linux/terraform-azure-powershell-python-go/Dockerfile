@@ -1,6 +1,6 @@
 FROM ukhydrographicoffice/terraform-azure-powershell:latest
 
-RUN apt-get update -q -y && apt-get install -q -y --no-install-recommends \
+RUN apt-get update -q -y && apt-get install -q -y --reinstall passwd && apt-get install -q -y --no-install-recommends \
                                                     python3-pip=* \
                                                     build-essential=* \
                                                     python3-dev=* \ 
