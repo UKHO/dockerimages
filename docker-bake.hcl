@@ -1,5 +1,5 @@
 group "all" {
-    targets = ["dependency-check", "terraform-win", "azure", "azure-devops", "dotnetcore80-zip", "jdk8-python38", "powershell-azure-node-newman", "terraform", "terraform-azure", "terraform-azure-make", "terraform-azure-powershell", "terraform-azure-powershell-go", "terraform-azure-powershell-python-go", "terraform-azure-powershell-unzip", "terraform-powershell"]
+    targets = ["dependency-check", "terraform-win", "azure", "azure-devops", "dotnetcore80-zip", "jdk8-python38", "powershell-azure-node-newman", "terraform", "terraform-azure", "terraform-azure-make", "terraform-azure-powershell", "terraform-azure-powershell-go", "terraform-azure-powershell-python-go", "terraform-azure-powershell-unzip", "terraform-powershell", "terraform-test-toolset"]
 }
 
 group "dependency-check" {
@@ -26,7 +26,8 @@ group "linux" {
     "terraform-azure-powershell-go", 
     "terraform-azure-powershell-python-go", 
     "terraform-azure-powershell-unzip", 
-    "terraform-powershell"]
+    "terraform-powershell",
+    "terraform-test-toolset"]
 }
 
 target "dependency-check" {
@@ -129,4 +130,10 @@ target "terraform-powershell" {
     context = "./linux/terraform-powershell"
     dockerfile = "Dockerfile"
     tags = ["ukhydrographicoffice/terraform-powershell:latest"]
+}
+
+target "terraform-test-toolset" {
+    context = "./linux/terraform-test-toolset"
+    dockerfile = "Dockerfile"
+    tags = ["ukhydrographicoffice/terraform-test-toolset:latest"]
 }

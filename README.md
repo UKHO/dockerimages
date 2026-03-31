@@ -26,6 +26,7 @@ Dockerfiles should conform to [best practices](https://docs.docker.com/develop/d
 | [terraform-azure-powershell-python-go](./linux/terraform-azure-powershell-python-go/Dockerfile) | Linux    | Terraform with Azure CLI, PowerShell, Python and Go |
 | [terraform-azure-powershell-unzip](./linux/terraform-azure-powershell-unzip/Dockerfile)         | Linux    | Terraform with Azure CLI, PowerShell and Unzip |
 | [terraform-powershell](./linux/terraform-powershell/Dockerfile)                                 | Linux    | Terraform with PowerShell |
+| [terraform-test-toolset](./linux/terraform-test-toolset/Dockerfile)                             | Linux    | Terraform with Azure CLI, PowerShell, Go, tflint, terraform-docs, terraform-compliance and Snyk |
 
 ## How to add a Docker Image
 
