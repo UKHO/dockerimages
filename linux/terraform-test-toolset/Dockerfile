@@ -44,6 +44,8 @@ RUN \
     # ── terraform-compliance (pip) ───────────────────────────────────────────
     && pip3 install --no-cache-dir --break-system-packages \
         "terraform-compliance==${TF_COMPLIANCE_VERSION}" \
+    # Patch: add TF 1.15 support (https://github.com/terraform-compliance/cli/pull/795)
+    && python3 -c "import terraform_compliance.extensions.terraform as m, inspect; f=inspect.getfile(m); c=open(f).read(); open(f,'w').write(c.replace('\x271.14.\x27,','\x271.14.\x27,\x0a            \x271.15.\x27,'))" \
     \
     # ── snyk CLI ────────────────────────────────────────────────────────────
     && curl -fsSLo /usr/local/bin/snyk \
