@@ -2,7 +2,7 @@ FROM ukhydrographicoffice/terraform-azure-powershell:latest
 
 ARG TFLINT_VERSION=0.59.1
 ARG TFDOCS_VERSION=0.19.0
-ARG TF_COMPLIANCE_VERSION=1.14.1
+ARG TF_COMPLIANCE_VERSION=1.15.0
 
 # Ensure we are root for installs (base image may drop to a non-root user)
 USER root
