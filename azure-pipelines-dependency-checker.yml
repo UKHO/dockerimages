@@ -11,9 +11,14 @@ schedules:
 
 pool: Mare Nectaris
 variables:
-- group: NvdApiKey
 - group: dockerhub
+
 steps:
+- template: include-kv.yml
+  parameters:
+    azureServiceConnection: 'AzDO Live - O69485'
+    keyVaultName: 'AzDoLive-KV'
+    secretsFilter: 'NvdApiKey'
 - script: echo "##vso[task.setvariable variable=BuildDate]$(date +%Y-%m-%d)"
   displayName: Set build date
 - script: |

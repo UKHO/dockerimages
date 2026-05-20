@@ -1,0 +1,17 @@
+parameters:
+  - name: azureServiceConnection
+    type: string
+  - name: keyVaultName
+    type: string
+  - name: secretsFilter
+    type: string
+    default: "*"
+
+steps:
+- task: AzureKeyVault@2
+  displayName: Fetch secrets from Key Vault (${{ parameters.keyVaultName }})
+  inputs:
+    azureSubscription: ${{ parameters.azureServiceConnection }}
+    KeyVaultName: ${{ parameters.keyVaultName }}
+    SecretsFilter: ${{ parameters.secretsFilter }}
+    RunAsPreJob: true
