@@ -4,6 +4,10 @@ variable "TAG" {}
 
 variable "SHA" {}
 
+variable "TERRAFORM_VERSION" {
+    value = "1.15.5"
+}
+
 group "all" {
     targets = [
         "dependency-check", 
@@ -69,7 +73,8 @@ target "terraform-win" {
     tags = [
         notequal("",LIVE) ? "ukhydrographicoffice/terraform:latest-win": "",
         notequal("",TAG) ? "ukhydrographicoffice/terraform:${TAG}-win": "",
-        notequal("",SHA) ? "ukhydrographicoffice/terraform:${SHA}-win": ""
+        notequal("",SHA) ? "ukhydrographicoffice/terraform:${SHA}-win": "",
+        notequal("",LIVE) ? "ukhydrographicoffice/terraform:${TERRAFORM_VERSION}-win" : ""
         ]
     output = [ "registry" ]
 }
@@ -168,8 +173,12 @@ target "terraform" {
     tags = [
         notequal("",LIVE) ? "ukhydrographicoffice/terraform:latest": "",
         notequal("",TAG) ? "ukhydrographicoffice/terraform:${TAG}": "",
-        notequal("",SHA) ? "ukhydrographicoffice/terraform:${SHA}": ""
+        notequal("",SHA) ? "ukhydrographicoffice/terraform:${SHA}": "",
+        notequal("",LIVE) ? "ukhydrographicoffice/terraform:${TERRAFORM_VERSION}": ""
         ]
+    args = {
+      "TERRAFORM_VERSION" = "${TERRAFORM_VERSION}"
+    }
     output = [ "registry" ]
 }
 
@@ -179,8 +188,12 @@ target "terraform-azure" {
     tags = [
         notequal("",LIVE) ? "ukhydrographicoffice/terraform-azure:latest": "",
         notequal("",TAG) ? "ukhydrographicoffice/terraform-azure:${TAG}": "",
-        notequal("",SHA) ? "ukhydrographicoffice/terraform-azure:${SHA}": ""
+        notequal("",SHA) ? "ukhydrographicoffice/terraform-azure:${SHA}": "",
+        notequal("",LIVE) ? "ukhydrographicoffice/terraform-azure:${TERRAFORM_VERSION}": ""
         ]
+    args = {
+      "TERRAFORM_VERSION" = "${TERRAFORM_VERSION}"
+    }
     output = [ "registry" ]
 }
 
@@ -190,8 +203,12 @@ target "terraform-azure-make" {
     tags = [
         notequal("",LIVE) ? "ukhydrographicoffice/terraform-azure-make:latest": "",
         notequal("",TAG) ? "ukhydrographicoffice/terraform-azure-make:${TAG}": "",
-        notequal("",SHA) ? "ukhydrographicoffice/terraform-azure-make:${SHA}": ""
+        notequal("",SHA) ? "ukhydrographicoffice/terraform-azure-make:${SHA}": "",
+        notequal("",LIVE) ? "ukhydrographicoffice/terraform-azure-make:${TERRAFORM_VERSION}": ""
         ]
+    args = {
+      "TERRAFORM_VERSION" = "${TERRAFORM_VERSION}"
+    }
     output = [ "registry" ]
 }
 
@@ -201,8 +218,12 @@ target "terraform-azure-powershell" {
     tags = [
         notequal("",LIVE) ? "ukhydrographicoffice/terraform-azure-powershell:latest": "",
         notequal("",TAG) ? "ukhydrographicoffice/terraform-azure-powershell:${TAG}": "",
-        notequal("",SHA) ? "ukhydrographicoffice/terraform-azure-powershell:${SHA}": ""
+        notequal("",SHA) ? "ukhydrographicoffice/terraform-azure-powershell:${SHA}": "",
+        notequal("",LIVE) ? "ukhydrographicoffice/terraform-azure-powershell:${TERRAFORM_VERSION}": ""
         ]
+    args = {
+      "TERRAFORM_VERSION" = "${TERRAFORM_VERSION}"
+    }
     output = [ "registry" ]
 }
 
@@ -212,7 +233,8 @@ target "terraform-azure-powershell-go" {
     tags = [
         notequal("",LIVE) ? "ukhydrographicoffice/terraform-azure-powershell-go:latest": "",
         notequal("",TAG) ? "ukhydrographicoffice/terraform-azure-powershell-go:${TAG}": "",
-        notequal("",SHA) ? "ukhydrographicoffice/terraform-azure-powershell-go:${SHA}": ""
+        notequal("",SHA) ? "ukhydrographicoffice/terraform-azure-powershell-go:${SHA}": "",
+        notequal("",LIVE) ? "ukhydrographicoffice/terraform-azure-powershell-go:${TERRAFORM_VERSION}": ""
         ]
     output = [ "registry" ]
 }
@@ -223,7 +245,8 @@ target "terraform-azure-powershell-python-go" {
     tags = [
         notequal("",LIVE) ? "ukhydrographicoffice/terraform-azure-powershell-python-go:latest": "",
         notequal("",TAG) ? "ukhydrographicoffice/terraform-azure-powershell-python-go:${TAG}": "",
-        notequal("",SHA) ? "ukhydrographicoffice/terraform-azure-powershell-python-go:${SHA}": ""
+        notequal("",SHA) ? "ukhydrographicoffice/terraform-azure-powershell-python-go:${SHA}": "",
+        notequal("",LIVE) ? "ukhydrographicoffice/terraform-azure-powershell-python-go:${TERRAFORM_VERSION}": ""
         ]
     output = [ "registry" ]
 }
@@ -234,8 +257,12 @@ target "terraform-azure-powershell-unzip" {
     tags = [
         notequal("",LIVE) ? "ukhydrographicoffice/terraform-azure-powershell-unzip:latest": "",
         notequal("",TAG) ? "ukhydrographicoffice/terraform-azure-powershell-unzip:${TAG}": "",
-        notequal("",SHA) ? "ukhydrographicoffice/terraform-azure-powershell-unzip:${SHA}": ""
+        notequal("",SHA) ? "ukhydrographicoffice/terraform-azure-powershell-unzip:${SHA}": "",
+        notequal("",LIVE) ? "ukhydrographicoffice/terraform-azure-powershell-unzip:${TERRAFORM_VERSION}": ""
         ]
+    args = {
+      "TERRAFORM_VERSION" = "${TERRAFORM_VERSION}"
+    }
     output = [ "registry" ]
 }
 
@@ -245,8 +272,12 @@ target "terraform-powershell" {
     tags = [
         notequal("",LIVE) ? "ukhydrographicoffice/terraform-powershell:latest": "",
         notequal("",TAG) ? "ukhydrographicoffice/terraform-powershell:${TAG}": "",
-        notequal("",SHA) ? "ukhydrographicoffice/terraform-powershell:${SHA}": ""
+        notequal("",SHA) ? "ukhydrographicoffice/terraform-powershell:${SHA}": "",
+        notequal("",LIVE) ? "ukhydrographicoffice/terraform-powershell:${TERRAFORM_VERSION}": ""
         ]
+    args = {
+      "TERRAFORM_VERSION" = "${TERRAFORM_VERSION}"
+    }
     output = [ "registry" ]
 }
 
@@ -256,7 +287,8 @@ target "terraform-test-toolset" {
     tags = [
         notequal("",LIVE) ? "ukhydrographicoffice/terraform-test-toolset:latest": "",
         notequal("",TAG) ? "ukhydrographicoffice/terraform-test-toolset:${TAG}": "",
-        notequal("",SHA) ? "ukhydrographicoffice/terraform-test-toolset:${SHA}": ""
+        notequal("",SHA) ? "ukhydrographicoffice/terraform-test-toolset:${SHA}": "",
+        notequal("",LIVE) ? "ukhydrographicoffice/terraform-test-toolset:${TERRAFORM_VERSION}": ""
         ]
     output = [ "registry" ]
 }
