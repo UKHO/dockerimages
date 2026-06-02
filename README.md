@@ -58,3 +58,7 @@ Run using `./runner build publish`
 
 Builds and pushes the Docker images:
 - `{docker repository from BUILD}/{parent directory}:{latest}`
+
+### Versioning
+
+When creating a PR images will be push to Docker hub with a sha tag so that if you wish to perform any testing this can be done. Once testing has been completed and changed are merged to main there will be a push to Docker hub with a `latest` tag, a SemVer tag that will need to be updated in the [version file](./version.txt) and the sha tag. It is recommended that you pin you dependencies to a sha/version rather than using latest - using latest is done so at your own risk. 
